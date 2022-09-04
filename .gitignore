@@ -25,3 +25,4 @@ masterThemes/
 
 *.pyc
 .ipynb_checkpoints/
+icons/generated/
