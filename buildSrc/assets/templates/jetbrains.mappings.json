@@ -2,5 +2,58 @@
   {
     "iconName": "notifications.svg",
     "sizes": [13]
+  },
+  {
+    "iconName": "db_solid.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "unlocked.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "vcs_solid.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "structure.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "bookmark.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "pull_request.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "todo.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "warning_circle.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "terminal_solid.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "services.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "profile.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "dependencies.svg",
+    "sizes": [13]
   }
+
+
+
+
+
 ]
