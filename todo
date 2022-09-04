@@ -1,0 +1,107 @@
+- Action Colors
+	- Select
+	- Running
+	- Stap
+- Base Icon Colors
+- Various Icon colors that compliment the theme.
+- Product Icons
+- File Icon.
+- LICENSE/LICENSE-GRAPHICS
+
+
+Icons Needed:
+File ✅
+Image ✅
+Plugins ✅
+Avatar ✅
+Settings ✅
+Build ✅
+Base Folder ✅
+Notification ✅
+DB ✅
+Alert ✅
+Lock (open/close) ✅
+VCS (branching) ✅
+Commit ✅
+Terminal ✅
+Add ✅
+Cheveron (down, left) ✅
+empty xml tag ✅
+Ellipse (horizontal/vertical) ✅
+resume ✅
+Debug ✅
+Run ✅
+Pause ✅
+Step Over ✅
+Step Into ✅
+Step Out ✅
+Restart ✅
+Stap ✅
+Close ✅
+Search (Left/Right) ✅
+Warning, Broked, Success ✅
+Refresh ✅
+Remote Connection ✅
+Remote Explorer ✅
+Heart ✅
+Cloud ✅
+Braces (Curly/Square) ✅
+Trash ✅
+DebugSolid ✅
+Bookmark ✅
+Profiler ✅
+VCS Solid ✅
+DB Solid ✅
+Terminal Solid ✅
+Commit vertical ✅
+Services ✅
+Structure ✅ 
+Todo ✅
+Dependencies ✅
+PR ✅
+Hide ✅
+Packages ✅
+Key ✅
+History ✅
+Revert ✅
+Update Project ✅
+Coverage ✅
+Filter ✅
+Expand All ✅
+Collapse All ✅
+Clear Text ✅
+Module ✅
+
+
+Non mvp:
+Link 
+Maven
+Gradle
+Code With Me
+
+Specific Stuff:
+- Test
+- Kotlin
+
+PSI Stuff:
+- Interface
+- Abstract Class
+- Class
+- Object
+- File
+
+File Icons Ideas:
+Pretzel
+Gumball
+Drop
+Gumdrop
+Cupcake
+Bow
+Shell
+Marshmellow
+Cowfee
+Kitty (ears maybe?)
+Horns
+Crown (Queen/King/Tiara)
+F22 Front profile
+
