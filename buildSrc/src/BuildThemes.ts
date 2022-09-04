@@ -1,148 +1,76 @@
 import {
-  BaseAppDokiThemeDefinition,
-  constructNamedColorTemplate,
-  DokiThemeDefinitions,
-  evaluateTemplates,
-  MasterDokiThemeDefinition,
-  resolvePaths,
-  StringDictionary,
+  dictionaryReducer,
+  resolvePaths, StringDictionary,
+  walkDir,
 } from "doki-build-source";
-import omit from 'lodash/omit';
-import fs from "fs";
 import path from "path";
+import xmlParser from "xml2js";
+import * as fs from "fs";
+import deepClone from 'lodash/cloneDeep';
 
-type AppDokiThemeDefinition = BaseAppDokiThemeDefinition;
+const xmlBuilder = new xmlParser.Builder({
+  renderOpts: {
+    pretty: false
+  }
+});
+
+const toXml = (xml1: string): Promise<any> =>
+  xmlParser.parseStringPromise(xml1)
 
 const {
-  repoDirectory,
-  masterThemeDefinitionDirectoryPath,
+  appTemplatesDirectoryPath
 } = resolvePaths(__dirname);
 
-// todo: dis
-type DokiThemeJupyter = {
-  [k: string]: any;
-};
 
-
-function buildTemplateVariables(
-  dokiThemeDefinition: MasterDokiThemeDefinition,
-  masterTemplateDefinitions: DokiThemeDefinitions,
-  dokiThemeAppDefinition: AppDokiThemeDefinition,
-): DokiThemeJupyter {
-  const namedColors: StringDictionary<string> = constructNamedColorTemplate(
-    dokiThemeDefinition,
-    masterTemplateDefinitions
-  );
-  const colorsOverride =
-    dokiThemeAppDefinition.overrides.theme?.colors || {};
-  const cleanedColors = Object.entries(namedColors)
-    .reduce((accum, [colorName, colorValue]) => ({
-      ...accum,
-      [colorName]: colorValue,
-    }), {});
-  return {
-    ...cleanedColors,
-    ...colorsOverride,
-  };
+type IconMapping = {
+  iconName: string;
+  sizes: number[];
 }
 
-function createDokiTheme(
-  masterThemeDefinitionPath: string,
-  masterThemeDefinition: MasterDokiThemeDefinition,
-  appTemplateDefinitions: DokiThemeDefinitions,
-  appThemeDefinition: AppDokiThemeDefinition,
-  masterTemplateDefinitions: DokiThemeDefinitions,
-) {
-  try {
-    return {
-      path: masterThemeDefinitionPath,
-      definition: masterThemeDefinition,
-      stickers: getStickers(masterThemeDefinition, masterThemeDefinitionPath),
-      templateVariables: buildTemplateVariables(
-        masterThemeDefinition,
-        masterTemplateDefinitions,
-        appThemeDefinition,
-      ),
-      theme: {},
-      appThemeDefinition: appThemeDefinition,
-    };
-  } catch (e) {
-    throw new Error(
-      `Unable to build ${masterThemeDefinition.name}'s theme for reasons ${e}`
-    );
-  }
-}
+const iconsDir = path.resolve(__dirname, '..', '..', 'icons',);
+const exportedIconsDir = path.join(iconsDir, 'exported');
+const generatedIconsDir = path.join(iconsDir, 'generated');
 
-function resolveStickerPath(themeDefinitionPath: string, sticker: string) {
-  const stickerPath = path.resolve(
-    path.resolve(themeDefinitionPath, ".."),
-    sticker
-  );
-  return stickerPath.substr(
-    masterThemeDefinitionDirectoryPath.length + "/definitions".length
-  );
-}
+console.log("Preparing to generate icons.");
+walkDir(exportedIconsDir)
+  .then(async icons => {
+    const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
+      const svgName = generatedIconPath.substring(exportedIconsDir.length + 1);
+      accum[svgName] = generatedIconPath;
+      return accum;
+    }, {} as StringDictionary<string>)
 
-const getStickers = (
-  dokiDefinition: MasterDokiThemeDefinition,
-  themePath: string
-) => {
-  const secondary =
-    dokiDefinition.stickers.secondary || dokiDefinition.stickers.normal;
-  return {
-    default: {
-      path: resolveStickerPath(themePath, dokiDefinition.stickers.default),
-      name: dokiDefinition.stickers.default,
-    },
-    ...(secondary
-      ? {
-        secondary: {
-          path: resolveStickerPath(themePath, secondary),
-          name: secondary,
-        },
-      }
-      : {}),
-  };
-};
-
-console.log("Preparing to generate themes.");
-const themesDirectory = path.resolve(repoDirectory, "src", "dokithemejupyter");
-
-evaluateTemplates(
-  {
-    appName: 'jupyter',
-    currentWorkingDirectory: __dirname,
-  },
-  createDokiTheme
-)
-  .then((dokiThemes) => {
-
-    // write things for extension
-    const dokiThemeDefinitions = dokiThemes
-      .map((dokiTheme) => {
-        const dokiDefinition = dokiTheme.definition;
-        return {
-          information: omit(dokiDefinition, [
-            "colors",
-            "overrides",
-            "ui",
-            "icons",
-          ]),
-          colors: dokiTheme.appThemeDefinition.colors,
-          stickers: dokiTheme.stickers,
-        };
+    const jetbrainsMappings: IconMapping[] = JSON.parse(
+      fs.readFileSync(path.join(appTemplatesDirectoryPath, 'jetbrains.mappings.json'), {
+        encoding: 'utf-8',
       })
-      .reduce((accum: StringDictionary<any>, definition) => {
-        accum[definition.information.id] = definition;
-        return accum;
-      }, {});
-    const finalDokiDefinitions = JSON.stringify(dokiThemeDefinitions);
-    fs.writeFileSync(
-      path.resolve(repoDirectory, "src", "DokiThemeDefinitions.ts"),
-      `export default ${finalDokiDefinitions};`
     );
 
+    for (const iconMapping of jetbrainsMappings) {
+      const iconName = iconMapping.iconName;
+      const exportedPath = svgNameToPatho[iconName];
+      if (!exportedPath) {
+        throw new Error(`Hey silly, you forgot to export ${iconName}`)
+      }
+
+      const svgAsXML = await toXml(fs.readFileSync(exportedPath, {encoding: 'utf-8'}));
+      iconMapping.sizes.forEach((iconSize) => {
+        const workingCopy = deepClone(svgAsXML);
+        const fileNameWithoutExtension = iconName.substring(0, iconName.length - 4);
+        const newFileName = `${fileNameWithoutExtension}_${iconSize}x${iconSize}.svg`;
+        const generatedFilePath = path.join(generatedIconsDir, newFileName);
+        workingCopy.svg.$.width = `${iconSize}px`;
+        workingCopy.svg.$.height = `${iconSize}px`;
+
+        fs.writeFileSync(
+          generatedFilePath,
+          xmlBuilder.buildObject(workingCopy),
+          {encoding: 'utf-8'}
+        )
+      })
+
+    }
   })
   .then(() => {
-    console.log("Theme Generation Complete!");
+    console.log("Icon Generation Complete!");
   });

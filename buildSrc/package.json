@@ -11,7 +11,7 @@
     "@types/aws-sdk": "^2.7.0",
     "@types/jest": "^26.0.0",
     "@types/lodash": "^4.14.155",
-    "@types/xml2js": "^0.4.5",
+    "@types/xml2js": "^0.4.11",
     "copy-webpack-plugin": "^6.0.2",
     "doki-build-source": "1.2.0",
     "jest": "^26.0.1",

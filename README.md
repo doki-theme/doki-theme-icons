@@ -29,9 +29,9 @@ The Doki Theme: <<App>>
 
 ## Attribution Requirements
 
-As an open source project, attribution is critical from a legal, practical and motivational perspective in our opinion. The graphics are licensed under the CC-BY 4.0 which has a pretty good guide on [best practices for attribution](https://wiki.creativecommons.org/Best_practices_for_attribution).
+As an open source project, attribution is critical from a legal, practical and motivational perspective in my opinion. The graphics are licensed under the CC-BY 4.0 which has a pretty good guide on [best practices for attribution](https://wiki.creativecommons.org/Best_practices_for_attribution).
 
-However, we consider the guide a bit onerous and as a project, will accept a mention in a project README or an 'About' section or footer on a website. In mobile applications, a common place would be in the Settings/About section (for example, see the mobile Twitter application Settings->About->Legal section). We would consider a mention in the HTML/JS source sufficient also.
+However, I consider the guide a bit onerous and as a project, and will accept a mention in a project README or an 'About' section or footer on a website. In mobile applications, a common place would be in the Settings/About section. I would consider a mention in the HTML/JS source sufficient also.
 
 ## Contributing
 
