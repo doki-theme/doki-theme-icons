@@ -58,6 +58,10 @@
   {
     "iconName": "chevron_up.svg",
     "sizes": [13]
+  },
+  {
+    "iconName": "chevron_right.svg",
+    "sizes": [13]
   }
 
 
