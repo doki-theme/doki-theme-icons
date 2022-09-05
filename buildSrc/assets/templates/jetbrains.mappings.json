@@ -50,6 +50,14 @@
   {
     "iconName": "dependencies.svg",
     "sizes": [13]
+  },
+  {
+    "iconName": "chevron_down.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "chevron_up.svg",
+    "sizes": [13]
   }
 
 
