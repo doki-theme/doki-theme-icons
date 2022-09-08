@@ -116,6 +116,20 @@ pin
 structure (DNA)
 soft wrap
 scroll to end
+PR Vertical
+inspectionsOKEmpty (/general/inspectionsOKEmpty.svg, check mark)
+not_connected (/icons/not_connected.svg, cloud gear question mark)
+update (/icons/update.svg, cloud icon download)
+endpoints (/icons/toolWindowEndpoints.svg network graph)
+services (redo)
+hidden toolbar (/general/tbHidden.svg square with bottom left lines in toolbar left corner)
+favorites
+remote server (/webreferences/server.svg)
+rating (/plugins/rating.svg)
+copy (/actions/copy.svg)
+
+
+
 
 
 JUNIT test mark
