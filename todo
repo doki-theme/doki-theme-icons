@@ -71,63 +71,66 @@ Expand All ✅
 Collapse All ✅
 Clear Text ✅
 Module ✅
-save
-open
-new notifications
-project
+save ✅
+new notifications ✅
+open ✅
+project ✅
+scratches & consoles ✅
+external libraries
+library ✅
+settings wrench ✅
+edit ✅
+solid warning circle ✅
+duplicate ✅
+watch ✅ (deal with it glasses)
+recursion ✅
+light bulb ✅ (ice cream)
+light house ✅
+Eye ✅ (zero two)
+breakpoints ✅
+mute breakpoints ✅
+snapshot ✅ (Camera w/ flash)
+compare ✅
+group ✅
+cherry ✅
+tags/tags (git view) ✅
+preview ✅
+new tab ✅
+Link ✅
+Code With Me ✅ (avatar)
+ignored test ✅ (outlined test)
+evaluate expression ✅
+stream trace ✅ (boat)
+layout ✅
+actual printer? ✅
+re-run failed tests ✅
+add to watch ✅ (debug)
+pin ✅
+structure ✅ (DNA)
+soft wrap ✅
+scroll to end ✅
+PR Vertical ✅
+endpoints ✅ (/icons/toolWindowEndpoints.svg network graph)
+hidden toolbar ✅ (/general/tbHidden.svg square with bottom left lines in toolbar left corner)
+favorites ✅
+rating ✅ (/plugins/rating.svg)
+copy ✅ (/actions/copy.svg)
+services (redo) ✅
+exceptions (lightning bolt /actions/lightning.svg)
+
 Gradle
 Gradle Sync
-Maven
-scratches & consoles
-external libraries
-library
-settings wrench
-edit
-solid warning circle
-duplicate
-watch (deal with it glasses)
-recursion
-function
+Maven ✅
+
 method
 field
-light bulb
-light house
-Eye (zero two)
-breakpoints
-mute breakpoints
-snapshot
-compare
-shelf
-group
-cherry
-tags/tags (git view)
-preview
-new tab
-Link
-Code With Me
-ignored test
-evaluate expression
-stream trace
-layout
-actual printer?
-re-run failed tests
-add to watch (debug)
-pin
-structure (DNA)
-soft wrap
-scroll to end
-PR Vertical
+function
+
+remote server (/webreferences/server.svg)
 inspectionsOKEmpty (/general/inspectionsOKEmpty.svg, check mark)
 not_connected (/icons/not_connected.svg, cloud gear question mark)
 update (/icons/update.svg, cloud icon download)
-endpoints (/icons/toolWindowEndpoints.svg network graph)
-services (redo)
-hidden toolbar (/general/tbHidden.svg square with bottom left lines in toolbar left corner)
-favorites
-remote server (/webreferences/server.svg)
-rating (/plugins/rating.svg)
-copy (/actions/copy.svg)
-
+shelf
 
 
 
