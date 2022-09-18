@@ -116,7 +116,9 @@ favorites ✅
 rating ✅ (/plugins/rating.svg)
 copy ✅ (/actions/copy.svg)
 services (redo) ✅
+
 exceptions (lightning bolt /actions/lightning.svg)
+expand/collapse (redo)
 
 Gradle
 Gradle Sync
