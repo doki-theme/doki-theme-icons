@@ -119,6 +119,7 @@ services (redo) ✅
 
 exceptions (lightning bolt /actions/lightning.svg)
 expand/collapse (redo)
+open (redo)
 
 Gradle
 Gradle Sync
@@ -132,7 +133,31 @@ remote server (/webreferences/server.svg)
 inspectionsOKEmpty (/general/inspectionsOKEmpty.svg, check mark)
 not_connected (/icons/not_connected.svg, cloud gear question mark)
 update (/icons/update.svg, cloud icon download)
+space
 shelf
+Preview Source /actions/previewDetails.svg
+create list /actions/addList.svg
+bookmark group /nodes/bookmarkGroup.svg
+change list /vcs/changelist.svg
+/vcs/patch_applied.svg
+/objectBrowser/sorted.svg
+/nodes/configFolder.svg
+/nodes/ppLibFolder.svg
+/actions/run_anything.svg
+/nodes/moduleGroup.svg
+/actions/dependencyAnalyzer.svg
+/actions/offlineMode.svg
+/general/balloonInformation.svg
+/icons/IntelliSort.svg
+/actions/GroupByPackage.svg
+/vcs/fetch.svg (re think, is same as update project)
+/nodes/moduleGroup.svg
+/ide/localScope.svg
+/toolwindows/toolWindowProblems.svg (colorz)
+/general/fitContent.svg
+/actions/newFolder.svg
+/general/inspectionsTypos.svg
+
 
 
 
