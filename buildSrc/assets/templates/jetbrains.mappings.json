@@ -4,6 +4,10 @@
     "sizes": [13]
   },
   {
+    "iconName": "new_notifications.svg",
+    "sizes": [13]
+  },
+  {
     "iconName": "db_solid.svg",
     "sizes": [13]
   },
@@ -61,6 +65,30 @@
   },
   {
     "iconName": "chevron_right.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "project_glyph.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "cupcake.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "commit_horizontal.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "build.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "pretzel.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "network_graph.svg",
     "sizes": [13]
   }
 ]

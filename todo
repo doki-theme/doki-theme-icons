@@ -120,8 +120,15 @@ services (redo) ✅
 exceptions (lightning bolt /actions/lightning.svg)
 expand/collapse (redo)
 open (redo)
+/runConfigurations/testPassed.svg
+ice cream (thicker)
+notifications (more bigger)
+scratches/consoles (redo)
+/actions/close.svg
+breakpoint active
 
-Gradle
+
+Gradle ✅
 Gradle Sync
 Maven ✅
 
@@ -157,6 +164,22 @@ change list /vcs/changelist.svg
 /general/fitContent.svg
 /actions/newFolder.svg
 /general/inspectionsTypos.svg
+maven /images/pluginGoal.svg (in maven -> plugins -> task)
+maven /images/updateFolders.svg
+/actions/download.svg
+/runConfigurations/showIgnored.svg
+/fileTypes/diagram.svg
+/actions/synchronizeScrolling.svg
+/actions/swapPanels.svg
+/actions/help.svg
+/actions/editSource.svg
+/toolwindows/documentation.svg
+/icons/springToolWindow.svg
+/vcs/shelveSilent.svg
+/Users/alexsimons/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/222.4167.29/IntelliJ IDEA 2022.1 EAP.app/Contents/plugins/Spring/lib/spring.jar
+/images/mavenPlugin.svg
+
+/nodes/method.svg
 
 
 
