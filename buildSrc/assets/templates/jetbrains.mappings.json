@@ -56,6 +56,10 @@
     "sizes": [13]
   },
   {
+    "iconName": "debug.svg",
+    "sizes": [13]
+  },
+  {
     "iconName": "chevron_down.svg",
     "sizes": [13]
   },
@@ -81,6 +85,10 @@
   },
   {
     "iconName": "build.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "dna.svg",
     "sizes": [13]
   },
   {

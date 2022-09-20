@@ -125,7 +125,13 @@ ice cream (thicker)
 notifications (more bigger)
 scratches/consoles (redo)
 /actions/close.svg
-breakpoint active
+breakpoint active/muted
+Skull /debugger/killProcess.svg
+plugin icon
+/actions/help.svg
+/icons/actions/force_step_into.svg
+Bigger restart/step over/step into/step out
+re-color zero two eye
 
 
 Gradle ✅
@@ -136,11 +142,15 @@ method
 field
 function
 
+/actions/runAll.svg
+/icons/Docker.svg
+/toolbarDecorator/import.svg
+/actions/runToCursor.svg
 remote server (/webreferences/server.svg)
 inspectionsOKEmpty (/general/inspectionsOKEmpty.svg, check mark)
 not_connected (/icons/not_connected.svg, cloud gear question mark)
 update (/icons/update.svg, cloud icon download)
-space
+jetbrains space
 shelf
 Preview Source /actions/previewDetails.svg
 create list /actions/addList.svg
@@ -171,13 +181,16 @@ maven /images/updateFolders.svg
 /fileTypes/diagram.svg
 /actions/synchronizeScrolling.svg
 /actions/swapPanels.svg
-/actions/help.svg
 /actions/editSource.svg
 /toolwindows/documentation.svg
 /icons/springToolWindow.svg
 /vcs/shelveSilent.svg
 /Users/alexsimons/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/222.4167.29/IntelliJ IDEA 2022.1 EAP.app/Contents/plugins/Spring/lib/spring.jar
 /images/mavenPlugin.svg
+/general/inspectionsMixed.svg
+/icons/SpringBootHealth.svg
+/img/featureTrainerBanner.svg
+/ide/notification/pluginUpdate.svg
 
 /nodes/method.svg
 
