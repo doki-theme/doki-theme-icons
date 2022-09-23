@@ -117,21 +117,32 @@ rating ✅ (/plugins/rating.svg)
 copy ✅ (/actions/copy.svg)
 services (redo) ✅
 
-exceptions (lightning bolt /actions/lightning.svg)
-expand/collapse (redo)
-open (redo)
-/runConfigurations/testPassed.svg
-ice cream (thicker)
-notifications (more bigger)
-scratches/consoles (redo)
+exceptions (lightning bolt /actions/lightning.svg) ✅
+expand/collapse (redo) ✅
+open (redo) ✅
+/runConfigurations/testPassed.svg ✅
+/runConfigurations/testFailed.svg test fail (rip) ✅ 🪦
+/runConfigurations/rerunFailedTests.svg (rip with play)
+/runConfigurations/testError.svg (skull)
+ice cream (thicker) ✅
+notifications (more bigger) ✅
+scratches/consoles (redo) ✅
 /actions/close.svg
 breakpoint active/muted
-Skull /debugger/killProcess.svg
-plugin icon
-/actions/help.svg
-/icons/actions/force_step_into.svg
-Bigger restart/step over/step into/step out
+Skull /debugger/killProcess.svg ✅
+plugin icon ✅
+/actions/help.svg ✅
+/icons/actions/force_step_into.svg ✅
+Bigger restart/step over/step into/step out ✅
 re-color zero two eye
+figure out how to take existing icon and shove it in a corner.
+/actions/swapPanels.svg
+/actions/exit.svg
+/runConfigurations/showPassed.svg
+/runConfigurations/showIgnored.svg (outline test) ✅
+/runConfigurations/testIgnored.svg
+/toolwindows/toolWindowRun.svg ✅
+/toolwindows/toolWindowProblems.svg ✅
 
 
 Gradle ✅
@@ -161,6 +172,7 @@ change list /vcs/changelist.svg
 /nodes/configFolder.svg
 /nodes/ppLibFolder.svg
 /actions/run_anything.svg
+/runConfigurations/sortbyDuration.svg
 /nodes/moduleGroup.svg
 /actions/dependencyAnalyzer.svg
 /actions/offlineMode.svg
@@ -170,7 +182,6 @@ change list /vcs/changelist.svg
 /vcs/fetch.svg (re think, is same as update project)
 /nodes/moduleGroup.svg
 /ide/localScope.svg
-/toolwindows/toolWindowProblems.svg (colorz)
 /general/fitContent.svg
 /actions/newFolder.svg
 /general/inspectionsTypos.svg

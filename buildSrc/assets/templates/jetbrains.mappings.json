@@ -36,7 +36,7 @@
     "sizes": [13]
   },
   {
-    "iconName": "warning_circle.svg",
+    "iconName": "warning_circle_filled.svg",
     "sizes": [13]
   },
   {
@@ -97,6 +97,10 @@
   },
   {
     "iconName": "network_graph.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "play_solid.svg",
     "sizes": [13]
   }
 ]
