@@ -73,6 +73,27 @@ function getPosition(svgPosition: Anchor): { x: number; y: number } {
   }
 }
 
+function addFill(nonBaseGuts: StringDictionary<any>, fill: string) {
+  if (!nonBaseGuts) {
+    return;
+  }
+
+  if (!nonBaseGuts.$) {
+    nonBaseGuts.$ = {};
+  }
+  nonBaseGuts.$.fill = fill;
+
+  Object.entries(nonBaseGuts)
+    .filter(([key]) => key !== "$")
+    .forEach(([_, value]) => {
+      if (value.length) {
+        value.forEach((item: any) => addFill(item, fill));
+      } else {
+        addFill(value, fill);
+      }
+    });
+}
+
 walkDir(exportedIconsDir)
   .then(async (icons) => {
     const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
@@ -84,6 +105,11 @@ walkDir(exportedIconsDir)
     const layeredIcons: {
       name: string;
       position?: Anchor;
+      margin?: {
+        x?: number;
+        y?: number;
+      };
+      fill?: string;
       scale?: number;
     }[][] = JSON.parse(
       fs.readFileSync(
@@ -126,9 +152,17 @@ walkDir(exportedIconsDir)
                 const { x, y } = getPosition(svgPosition);
                 nonBaseGuts.$ = {
                   ...nonBaseGuts.$,
-                  transform: `scale(${scale} ${scale}) translate(${x} ${y})`,
+                  transform: `scale(${scale} ${scale}) translate(${
+                    x + (nextSVGSpec.margin?.x || 0)
+                  } ${y + (nextSVGSpec.margin?.y || 0)})`,
                 };
               }
+
+              const fill = nextSVGSpec.fill;
+              if (fill) {
+                addFill(nonBaseGuts, fill);
+              }
+
               currentSVG.layeredSVG.svg.g.push(nonBaseGuts);
               return currentSVG;
             }

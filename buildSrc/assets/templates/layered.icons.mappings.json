@@ -5,7 +5,11 @@
     },
     {
       "name": "flash_star.svg",
-      "position": "UPPER_RIGHT"
+      "position": "UPPER_RIGHT",
+      "margin": {
+        "y": -1,
+        "x": 6
+      }
     }
   ],
   [
@@ -32,7 +36,10 @@
     },
     {
       "name": "heart.svg",
-      "position": "UPPER_RIGHT"
+      "position": "UPPER_RIGHT",
+      "margin": {
+        "y": -4
+      }
     }
   ],
   [
@@ -41,7 +48,11 @@
     },
     {
       "name": "heart.svg",
-      "position": "UPPER_RIGHT"
+      "position": "UPPER_RIGHT",
+      "margin": {
+        "y": -4
+      },
+      "fill": "#ff0000"
     }
   ]
 ]
