@@ -38,6 +38,41 @@ function extractGuts(svgGuy: any) {
   return gutsToGroup;
 }
 
+type Anchor =
+  | "UPPER_RIGHT"
+  | "UPPER_LEFT"
+  | "UPPER"
+  | "MIDDLE_LEFT"
+  | "MIDDLE_RIGHT"
+  | "MIDDLE"
+  | "LOWER_LEFT"
+  | "LOWER"
+  | "LOWER_RIGHT";
+
+function getPosition(svgPosition: Anchor): { x: number; y: number } {
+  switch (svgPosition) {
+    case "LOWER_LEFT":
+      return { x: 0, y: 24 };
+    case "LOWER_RIGHT":
+      return { x: 24, y: 24 };
+    case "LOWER":
+      return { x: 12, y: 24 };
+    case "MIDDLE_LEFT":
+      return { x: 0, y: 12 };
+    case "MIDDLE":
+      return { x: 12, y: 12 };
+    case "MIDDLE_RIGHT":
+      return { x: 24, y: 12 };
+    default:
+    case "UPPER_LEFT":
+      return { x: 0, y: 0 };
+    case "UPPER":
+      return { x: 12, y: 0 };
+    case "UPPER_RIGHT":
+      return { x: 24, y: 0 };
+  }
+}
+
 walkDir(exportedIconsDir)
   .then(async (icons) => {
     const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
@@ -45,6 +80,68 @@ walkDir(exportedIconsDir)
       accum[svgName] = generatedIconPath;
       return accum;
     }, {} as StringDictionary<string>);
+
+    const layeredIcons: {
+      name: string;
+      position?: Anchor;
+      scale?: number;
+    }[][] = JSON.parse(
+      fs.readFileSync(
+        path.join(appTemplatesDirectoryPath, "layered.icons.mappings.json"),
+        {
+          encoding: "utf-8",
+        }
+      )
+    );
+
+    for (const iconLayers of layeredIcons) {
+      const { fileName, layeredSVG } = await iconLayers.reduce<
+        Promise<{ fileName: string; layeredSVG: any }>
+      >(
+        (currentSVGPromise, nextSVGSpec) =>
+          currentSVGPromise.then(async (currentSVG) => {
+            const svgName = nextSVGSpec.name;
+            const exportedPath = svgNameToPatho[svgName];
+            if (!exportedPath) {
+              throw new Error(`Hey silly, you forgot to export ${svgName}`);
+            }
+            const svgAsXML = await toXml(
+              fs.readFileSync(exportedPath, { encoding: "utf-8" })
+            );
+            const fileName = svgName.substring(0, svgName.lastIndexOf(".svg"));
+            if (!currentSVG.layeredSVG) {
+              const svgGuy = svgAsXML.svg;
+              const groupedGuts = extractGuts(svgGuy);
+              svgGuy.g = [groupedGuts];
+              return {
+                fileName,
+                layeredSVG: svgAsXML,
+              };
+            } else {
+              currentSVG.fileName += `_${fileName}`;
+              const nonBaseGuts = extractGuts(svgAsXML.svg);
+              const svgPosition = nextSVGSpec.position;
+              if (svgPosition) {
+                const scale = 0.5;
+                const { x, y } = getPosition(svgPosition);
+                nonBaseGuts.$ = {
+                  ...nonBaseGuts.$,
+                  transform: `scale(${scale} ${scale}) translate(${x} ${y})`,
+                };
+              }
+              currentSVG.layeredSVG.svg.g.push(nonBaseGuts);
+              return currentSVG;
+            }
+          }),
+        Promise.resolve({ fileName: "", layeredSVG: undefined })
+      );
+
+      fs.writeFileSync(
+        path.join(generatedIconsDir, `${fileName}.svg`),
+        xmlBuilder.buildObject(layeredSVG),
+        { encoding: "utf-8" }
+      );
+    }
 
     const jetbrainsMappings: IconMapping[] = JSON.parse(
       fs.readFileSync(
@@ -57,13 +154,14 @@ walkDir(exportedIconsDir)
 
     for (const iconMapping of jetbrainsMappings) {
       const iconName = iconMapping.iconName;
-      const exportedPath = svgNameToPatho[iconName];
-      if (!exportedPath) {
+      const svgPath =
+        svgNameToPatho[iconName] || path.join(generatedIconsDir, iconName);
+      if (!fs.existsSync(svgPath)) {
         throw new Error(`Hey silly, you forgot to export ${iconName}`);
       }
 
       const svgAsXML = await toXml(
-        fs.readFileSync(exportedPath, { encoding: "utf-8" })
+        fs.readFileSync(svgPath, { encoding: "utf-8" })
       );
       iconMapping.sizes.forEach((iconSize) => {
         const workingCopy = deepClone(svgAsXML);
@@ -82,56 +180,6 @@ walkDir(exportedIconsDir)
           { encoding: "utf-8" }
         );
       });
-    }
-
-    const layeredIcons: string[][] = JSON.parse(
-      fs.readFileSync(
-        path.join(appTemplatesDirectoryPath, "layered.icons.mappings.json"),
-        {
-          encoding: "utf-8",
-        }
-      )
-    );
-
-    for (const iconLayers of layeredIcons) {
-      const { fileName, layeredSVG } = await iconLayers.reduce<
-        Promise<{ fileName: string; layeredSVG: any }>
-      >(
-        (currentSVGPromise, nextSVGName) =>
-          currentSVGPromise.then(async (currentSVG) => {
-            const exportedPath = svgNameToPatho[nextSVGName];
-            if (!exportedPath) {
-              throw new Error(`Hey silly, you forgot to export ${nextSVGName}`);
-            }
-            const svgAsXML = await toXml(
-              fs.readFileSync(exportedPath, { encoding: "utf-8" })
-            );
-            const fileName = nextSVGName.substring(
-              0,
-              nextSVGName.lastIndexOf(".svg")
-            );
-            if (!currentSVG.layeredSVG) {
-              const svgGuy = svgAsXML.svg;
-              const groupedGuts = extractGuts(svgGuy);
-              svgGuy.g = [groupedGuts];
-              return {
-                fileName,
-                layeredSVG: svgAsXML,
-              };
-            } else {
-              currentSVG.fileName += `_${fileName}`;
-              currentSVG.layeredSVG.svg.g.push(extractGuts(svgAsXML.svg));
-              return currentSVG;
-            }
-          }),
-        Promise.resolve({ fileName: "", layeredSVG: undefined })
-      );
-
-      fs.writeFileSync(
-        path.join(generatedIconsDir, `${fileName}.svg`),
-        xmlBuilder.buildObject(layeredSVG),
-        { encoding: "utf-8" }
-      );
     }
   })
   .then(() => {

@@ -1,5 +1,47 @@
 [
-  ["image.svg", "upper_right_star.svg"],
-  ["tab.svg", "add_to.svg"],
-  ["watch.svg", "add_to.svg"]
+  [
+    {
+      "name": "image.svg"
+    },
+    {
+      "name": "flash_star.svg",
+      "position": "UPPER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "tab.svg"
+    },
+    {
+      "name": "add.svg",
+      "position": "LOWER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "watch.svg"
+    },
+    {
+      "name": "add.svg",
+      "position": "LOWER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "file.svg"
+    },
+    {
+      "name": "heart.svg",
+      "position": "UPPER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "notifications.svg"
+    },
+    {
+      "name": "heart.svg",
+      "position": "UPPER_RIGHT"
+    }
+  ]
 ]
