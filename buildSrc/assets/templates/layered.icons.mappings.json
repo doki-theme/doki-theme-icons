@@ -54,5 +54,24 @@
       },
       "fill": "#ff0000"
     }
+  ],
+  [
+    {
+      "name": "rip.svg"
+    },
+    {
+      "name": "play_solid.svg",
+      "position": "LOWER_RIGHT",
+      "fill": "#ff0000"
+    }
+  ],
+  [
+    {
+      "name": "breakpoint.svg"
+    },
+    {
+      "name": "check.svg",
+      "position": "UPPER_RIGHT"
+    }
   ]
 ]

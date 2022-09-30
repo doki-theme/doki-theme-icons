@@ -3,15 +3,16 @@ import path from "path";
 import xmlParser from "xml2js";
 import * as fs from "fs";
 import deepClone from "lodash/cloneDeep";
+import builder from "xmlbuilder";
 
-const xmlBuilder = new xmlParser.Builder({
-  renderOpts: {
-    pretty: false,
-  },
-});
+const parser = new xmlParser.Parser({
+  explicitChildren: true,
+  mergeAttrs: false,
+  preserveChildrenOrder: true,
+})
 
 const toXml = (xml1: string): Promise<any> =>
-  xmlParser.parseStringPromise(xml1);
+  parser.parseStringPromise(xml1);
 
 const { appTemplatesDirectoryPath } = resolvePaths(__dirname);
 
@@ -26,16 +27,28 @@ const generatedIconsDir = path.join(iconsDir, "generated");
 
 console.log("Preparing to generate icons.");
 
-function extractGuts(svgGuy: any) {
-  const otherKeys = Object.keys(svgGuy).filter((key) => key !== "$");
-  const gutsToGroup = otherKeys
-    .map((key) => [key, svgGuy[key]])
-    .reduce((accum, [key, value]) => {
-      accum[key] = value;
-      return accum;
-    }, {} as StringDictionary<any>);
-  otherKeys.forEach((key) => delete svgGuy[key]);
-  return gutsToGroup;
+function constructSVG(root: any, children: any[]) {
+  if (!children) {
+    return;
+  }
+
+  for (const child of children) {
+    const childNode = root.ele(child["#name"], child.$ || {});
+    constructSVG(childNode, child.$$);
+  }
+}
+
+function buildXml(workingCopy: any): string {
+  const svg = workingCopy.svg;
+  const root = builder.create(svg["#name"]);
+
+  Object.entries(svg.$).forEach(([attributeKey, attributeValue]) =>
+    root.att(attributeKey, attributeValue)
+  );
+
+  constructSVG(root, svg.$$);
+
+  return root.end({ pretty: true });
 }
 
 type Anchor =
@@ -83,14 +96,9 @@ function addFill(nonBaseGuts: StringDictionary<any>, fill: string) {
   }
   nonBaseGuts.$.fill = fill;
 
-  Object.entries(nonBaseGuts)
-    .filter(([key]) => key !== "$")
-    .forEach(([_, value]) => {
-      if (value.length) {
-        value.forEach((item: any) => addFill(item, fill));
-      } else {
-        addFill(value, fill);
-      }
+  (nonBaseGuts.$$ || [])
+    .forEach((item: any) => {
+      addFill(item, fill)
     });
 }
 
@@ -137,15 +145,20 @@ walkDir(exportedIconsDir)
             const fileName = svgName.substring(0, svgName.lastIndexOf(".svg"));
             if (!currentSVG.layeredSVG) {
               const svgGuy = svgAsXML.svg;
-              const groupedGuts = extractGuts(svgGuy);
-              svgGuy.g = [groupedGuts];
+              svgGuy.$$ = [
+                {"#name": "g", $$: svgGuy.$$}
+              ]
               return {
                 fileName,
                 layeredSVG: svgAsXML,
               };
             } else {
               currentSVG.fileName += `_${fileName}`;
-              const nonBaseGuts = extractGuts(svgAsXML.svg);
+              const nonBaseGuts = {
+                $: {},
+                '#name':"g",
+                $$: svgAsXML.svg.$$
+              };
               const svgPosition = nextSVGSpec.position;
               if (svgPosition) {
                 const scale = 0.5;
@@ -163,7 +176,7 @@ walkDir(exportedIconsDir)
                 addFill(nonBaseGuts, fill);
               }
 
-              currentSVG.layeredSVG.svg.g.push(nonBaseGuts);
+              currentSVG.layeredSVG.svg.$$.push(nonBaseGuts);
               return currentSVG;
             }
           }),
@@ -172,7 +185,7 @@ walkDir(exportedIconsDir)
 
       fs.writeFileSync(
         path.join(generatedIconsDir, `${fileName}.svg`),
-        xmlBuilder.buildObject(layeredSVG),
+        buildXml(layeredSVG),
         { encoding: "utf-8" }
       );
     }
@@ -210,7 +223,7 @@ walkDir(exportedIconsDir)
 
         fs.writeFileSync(
           generatedFilePath,
-          xmlBuilder.buildObject(workingCopy),
+          buildXml(workingCopy),
           { encoding: "utf-8" }
         );
       });
