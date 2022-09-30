@@ -73,5 +73,59 @@
       "name": "check.svg",
       "position": "UPPER_RIGHT"
     }
+  ],
+  [
+    {
+      "name": "test_outline.svg"
+    },
+    {
+      "name": "view.svg",
+      "position": "LOWER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "tada.svg"
+    },
+    {
+      "name": "view.svg",
+      "position": "LOWER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "file.svg"
+    },
+    {
+      "name": "config.svg",
+      "position": "LOWER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "layout.svg"
+    },
+    {
+      "name": "dual_chevrons.svg",
+      "position": "MIDDLE"
+    }
+  ],
+  [
+    {
+      "name": "cupcake.svg"
+    },
+    {
+      "name": "refresh.svg",
+      "position": "LOWER_RIGHT"
+    }
+  ],
+  [
+    {
+      "name": "pretzel.svg"
+    },
+    {
+      "name": "refresh.svg",
+      "position": "LOWER_RIGHT"
+    }
   ]
 ]

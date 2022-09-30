@@ -136,18 +136,21 @@ plugin icon ✅
 Bigger restart/step over/step into/step out ✅
 re-color zero two eye
 figure out how to take existing icon and shove it in a corner. ✅
-/actions/swapPanels.svg
-/actions/exit.svg
-/runConfigurations/showPassed.svg
+/actions/swapPanels.svg ✅(layout/dual chevrons)
+/actions/exit.svg ✅(close)
+/runConfigurations/showPassed.svg (with eye) ✅
 /runConfigurations/showIgnored.svg (outline test) ✅
-/runConfigurations/testIgnored.svg
+/runConfigurations/testIgnored.svg (with eye) ✅
 /toolwindows/toolWindowRun.svg ✅
 /toolwindows/toolWindowProblems.svg ✅
+/ide/configFile.svg ✅
+- sizing of the layered icons
 
 
 Gradle ✅
-Gradle Sync
+Gradle Sync ✅
 Maven ✅
+Maven Refresh ✅
 
 method
 field
