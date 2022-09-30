@@ -37,8 +37,9 @@
     {
       "name": "heart.svg",
       "position": "UPPER_RIGHT",
+      "scale": 0.55,
       "margin": {
-        "y": -4
+        "y": -2.5
       }
     }
   ],
@@ -49,8 +50,9 @@
     {
       "name": "heart.svg",
       "position": "UPPER_RIGHT",
+      "scale": 0.55,
       "margin": {
-        "y": -4
+        "y": -2.5
       },
       "fill": "#ff0000"
     }
@@ -80,7 +82,11 @@
     },
     {
       "name": "view.svg",
-      "position": "LOWER_RIGHT"
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "margin": {
+        "y": 2.5
+      }
     }
   ],
   [
@@ -89,7 +95,11 @@
     },
     {
       "name": "view.svg",
-      "position": "LOWER_RIGHT"
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "margin": {
+        "y": 2.5
+      }
     }
   ],
   [

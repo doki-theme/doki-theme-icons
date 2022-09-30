@@ -9,10 +9,9 @@ const parser = new xmlParser.Parser({
   explicitChildren: true,
   mergeAttrs: false,
   preserveChildrenOrder: true,
-})
+});
 
-const toXml = (xml1: string): Promise<any> =>
-  parser.parseStringPromise(xml1);
+const toXml = (xml1: string): Promise<any> => parser.parseStringPromise(xml1);
 
 const { appTemplatesDirectoryPath } = resolvePaths(__dirname);
 
@@ -62,27 +61,37 @@ type Anchor =
   | "LOWER"
   | "LOWER_RIGHT";
 
-function getPosition(svgPosition: Anchor): { x: number; y: number } {
+const defaultSvgSize = 24;
+
+function getPosition(
+  svgPosition: Anchor,
+  scale: number
+): { x: number; y: number } {
+  const scaledSVG = defaultSvgSize * scale;
+  const delta = defaultSvgSize - scaledSVG;
   switch (svgPosition) {
     case "LOWER_LEFT":
-      return { x: 0, y: 24 };
+      return { x: 0, y: delta };
     case "LOWER_RIGHT":
-      return { x: 24, y: 24 };
+      return {
+        x: delta,
+        y: delta,
+      };
     case "LOWER":
-      return { x: 12, y: 24 };
+      return { x: delta / 2, y: delta };
     case "MIDDLE_LEFT":
-      return { x: 0, y: 12 };
+      return { x: 0, y: delta / 2 };
     case "MIDDLE":
-      return { x: 12, y: 12 };
+      return { x: delta / 2, y: delta / 2 };
     case "MIDDLE_RIGHT":
-      return { x: 24, y: 12 };
+      return { x: delta, y: delta / 2 };
     default:
     case "UPPER_LEFT":
       return { x: 0, y: 0 };
     case "UPPER":
-      return { x: 12, y: 0 };
+      return { x: delta / 2, y: 0 };
     case "UPPER_RIGHT":
-      return { x: 24, y: 0 };
+      return { x: delta, y: 0 };
   }
 }
 
@@ -96,10 +105,9 @@ function addFill(nonBaseGuts: StringDictionary<any>, fill: string) {
   }
   nonBaseGuts.$.fill = fill;
 
-  (nonBaseGuts.$$ || [])
-    .forEach((item: any) => {
-      addFill(item, fill)
-    });
+  (nonBaseGuts.$$ || []).forEach((item: any) => {
+    addFill(item, fill);
+  });
 }
 
 walkDir(exportedIconsDir)
@@ -145,9 +153,7 @@ walkDir(exportedIconsDir)
             const fileName = svgName.substring(0, svgName.lastIndexOf(".svg"));
             if (!currentSVG.layeredSVG) {
               const svgGuy = svgAsXML.svg;
-              svgGuy.$$ = [
-                {"#name": "g", $$: svgGuy.$$}
-              ]
+              svgGuy.$$ = [{ "#name": "g", $$: svgGuy.$$ }];
               return {
                 fileName,
                 layeredSVG: svgAsXML,
@@ -156,18 +162,18 @@ walkDir(exportedIconsDir)
               currentSVG.fileName += `_${fileName}`;
               const nonBaseGuts = {
                 $: {},
-                '#name':"g",
-                $$: svgAsXML.svg.$$
+                "#name": "g",
+                $$: svgAsXML.svg.$$,
               };
               const svgPosition = nextSVGSpec.position;
               if (svgPosition) {
-                const scale = 0.5;
-                const { x, y } = getPosition(svgPosition);
+                const scale = nextSVGSpec.scale || 0.5;
+                const { x, y } = getPosition(svgPosition, scale);
                 nonBaseGuts.$ = {
                   ...nonBaseGuts.$,
-                  transform: `scale(${scale} ${scale}) translate(${
-                    x + (nextSVGSpec.margin?.x || 0)
-                  } ${y + (nextSVGSpec.margin?.y || 0)})`,
+                  transform: `translate(${x + (nextSVGSpec.margin?.x || 0)} ${
+                    y + (nextSVGSpec.margin?.y || 0)
+                  }) scale(${scale} ${scale})`,
                 };
               }
 
@@ -221,11 +227,9 @@ walkDir(exportedIconsDir)
         workingCopy.svg.$.width = `${iconSize}px`;
         workingCopy.svg.$.height = `${iconSize}px`;
 
-        fs.writeFileSync(
-          generatedFilePath,
-          buildXml(workingCopy),
-          { encoding: "utf-8" }
-        );
+        fs.writeFileSync(generatedFilePath, buildXml(workingCopy), {
+          encoding: "utf-8",
+        });
       });
     }
   })
