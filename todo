@@ -128,7 +128,7 @@ ice cream (thicker) ✅
 notifications (more bigger) ✅
 scratches/consoles (redo) ✅
 /actions/close.svg ✅
-breakpoint active/muted
+breakpoint active/muted ✅
 Skull /debugger/killProcess.svg ✅
 plugin icon ✅
 /actions/help.svg ✅
@@ -155,7 +155,7 @@ method
 field
 function
 
-/actions/runAll.svg
+/actions/runAll.svg (color palette)
 /icons/Docker.svg
 /toolbarDecorator/import.svg
 /actions/runToCursor.svg

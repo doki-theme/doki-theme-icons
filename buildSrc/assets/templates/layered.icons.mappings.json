@@ -81,7 +81,7 @@
       "name": "test_outline.svg"
     },
     {
-      "name": "view.svg",
+      "name": "view_filled.svg",
       "position": "LOWER_RIGHT",
       "scale": 0.65,
       "margin": {
@@ -94,7 +94,7 @@
       "name": "tada.svg"
     },
     {
-      "name": "view.svg",
+      "name": "view_filled.svg",
       "position": "LOWER_RIGHT",
       "scale": 0.65,
       "margin": {
