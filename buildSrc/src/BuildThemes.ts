@@ -110,6 +110,43 @@ function addFill(nonBaseGuts: StringDictionary<any>, fill: string) {
   });
 }
 
+type LayeredSVGSpec = {
+  name: string;
+  position?: Anchor;
+  margin?: {
+    x?: number;
+    y?: number;
+  };
+  fill?: string;
+  scale?: number;
+  newName?: string;
+};
+
+function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
+  const nonBaseGuts = {
+    $: {},
+    "#name": "g",
+    $$: svgAsXML.svg.$$,
+  };
+  const svgPosition = nextSVGSpec.position;
+  if (svgPosition) {
+    const scale = nextSVGSpec.scale || 0.5;
+    const { x, y } = getPosition(svgPosition, scale);
+    nonBaseGuts.$ = {
+      ...nonBaseGuts.$,
+      transform: `translate(${x + (nextSVGSpec.margin?.x || 0)} ${
+        y + (nextSVGSpec.margin?.y || 0)
+      }) scale(${scale} ${scale})`,
+    };
+  }
+
+  const fill = nextSVGSpec.fill;
+  if (fill) {
+    addFill(nonBaseGuts, fill);
+  }
+  return nonBaseGuts;
+}
+
 walkDir(exportedIconsDir)
   .then(async (icons) => {
     const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
@@ -118,16 +155,7 @@ walkDir(exportedIconsDir)
       return accum;
     }, {} as StringDictionary<string>);
 
-    const layeredIcons: {
-      name: string;
-      position?: Anchor;
-      margin?: {
-        x?: number;
-        y?: number;
-      };
-      fill?: string;
-      scale?: number;
-    }[][] = JSON.parse(
+    const layeredIcons: LayeredSVGSpec[][] = JSON.parse(
       fs.readFileSync(
         path.join(appTemplatesDirectoryPath, "layered.icons.mappings.json"),
         {
@@ -151,36 +179,17 @@ walkDir(exportedIconsDir)
               fs.readFileSync(exportedPath, { encoding: "utf-8" })
             );
             const fileName = svgName.substring(0, svgName.lastIndexOf(".svg"));
+            const resolvedFileName = nextSVGSpec.newName || fileName;
             if (!currentSVG.layeredSVG) {
               const svgGuy = svgAsXML.svg;
-              svgGuy.$$ = [{ "#name": "g", $$: svgGuy.$$ }];
+              svgGuy.$$ = [processSVG(svgAsXML, nextSVGSpec)];
               return {
-                fileName,
+                fileName: resolvedFileName,
                 layeredSVG: svgAsXML,
               };
             } else {
-              currentSVG.fileName += `_${fileName}`;
-              const nonBaseGuts = {
-                $: {},
-                "#name": "g",
-                $$: svgAsXML.svg.$$,
-              };
-              const svgPosition = nextSVGSpec.position;
-              if (svgPosition) {
-                const scale = nextSVGSpec.scale || 0.5;
-                const { x, y } = getPosition(svgPosition, scale);
-                nonBaseGuts.$ = {
-                  ...nonBaseGuts.$,
-                  transform: `translate(${x + (nextSVGSpec.margin?.x || 0)} ${
-                    y + (nextSVGSpec.margin?.y || 0)
-                  }) scale(${scale} ${scale})`,
-                };
-              }
-
-              const fill = nextSVGSpec.fill;
-              if (fill) {
-                addFill(nonBaseGuts, fill);
-              }
+              currentSVG.fileName += `_${resolvedFileName}`;
+              const nonBaseGuts = processSVG(svgAsXML, nextSVGSpec);
 
               currentSVG.layeredSVG.svg.$$.push(nonBaseGuts);
               return currentSVG;

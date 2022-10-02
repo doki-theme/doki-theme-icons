@@ -137,5 +137,13 @@
       "name": "refresh.svg",
       "position": "LOWER_RIGHT"
     }
+  ],
+  [
+    {
+      "name": "close.svg",
+      "newName": "close_small",
+      "scale": 0.75,
+      "position": "MIDDLE"
+    }
   ]
 ]
