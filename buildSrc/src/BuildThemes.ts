@@ -13,7 +13,7 @@ const parser = new xmlParser.Parser({
 
 const toXml = (xml1: string): Promise<any> => parser.parseStringPromise(xml1);
 
-const { appTemplatesDirectoryPath } = resolvePaths(__dirname);
+const { appTemplatesDirectoryPath, masterTemplateDirectoryPath } = resolvePaths(__dirname);
 
 type IconMapping = {
   iconName: string;
@@ -122,6 +122,12 @@ type LayeredSVGSpec = {
   newName?: string;
 };
 
+const namedColors: StringDictionary<string> = JSON.parse(fs.readFileSync(
+  path.join(masterTemplateDirectoryPath, 'base.colors.template.json'),{
+    encoding: 'utf-8',
+  }
+)).colors
+
 function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
   const nonBaseGuts = {
     $: {},
@@ -142,7 +148,7 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
 
   const fill = nextSVGSpec.fill;
   if (fill) {
-    addFill(nonBaseGuts, fill);
+    addFill(nonBaseGuts, namedColors[fill] || fill);
   }
   return nonBaseGuts;
 }
