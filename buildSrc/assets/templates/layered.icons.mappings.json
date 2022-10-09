@@ -53,8 +53,7 @@
       "scale": 0.55,
       "margin": {
         "y": -2.5
-      },
-      "fill": "#ff0000"
+      }
     }
   ],
   [
@@ -126,7 +125,8 @@
     },
     {
       "name": "refresh.svg",
-      "position": "LOWER_RIGHT"
+      "position": "LOWER_RIGHT",
+      "scale": 0.65
     }
   ],
   [
@@ -135,7 +135,8 @@
     },
     {
       "name": "refresh.svg",
-      "position": "LOWER_RIGHT"
+      "position": "LOWER_RIGHT",
+      "scale": 0.75
     }
   ],
   [
