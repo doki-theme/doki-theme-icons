@@ -239,11 +239,13 @@ F22 Front profile
 
  Color Ideas:
 
- - Should have complementary colors that look nice.
- - Should be around the same spectrum as to complement others
- - Colors should have a dedicated pair, but should be able to mingle with the other colors if need be.
- - Should have a set of colored pairs that are accessible.
- - Should have stand out colors that are different & add spice to the mix.
- - Should have base color that stands out to all colors
-
- - Highlight Should Complement contrast color
+ - There should be a pair of colors that works well with the Accent Color (cyan & dark blue)
+  - **iconContrastColorOne** <- Accent compliment (dark blue) & **iconContrastColorTwo** <- Accent Color (cyan)
+  - They won't necessarily be very readable
+  - Should be used for accenting things & not for precise details.
+- There should be Two Colors That are nice compliments of each other.
+  - They blend nicely with each other & work well with the doki icon.
+- There should be one color that stands out for the rest of them & should be used sparingly (maybe on one or two common icons)
+  - This color works the same as the classname color in providing the extra something.
+- There should be one color that compliments base of the blended compliment
+  - Something that works well with the breakpoint's ring.
