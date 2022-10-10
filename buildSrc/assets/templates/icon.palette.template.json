@@ -1,11 +1,9 @@
 {
-  "#e62d94": "iconError",
-  "#1785ff": "iconContrastColorOne",
-  "#6ee4f8": "iconContrastColorTwo",
-  "#9a8bff": "iconBlendColorOne",
-  "#ff8bf5": "iconBlendColorTwo",
-  "#6e85f8": "iconBlendColorThree",
-  "#5c98ff": "iconBlendColorFour",
-  "#ff958b": "iconHighlightColorOne",
-  "#8bff95": "iconHighlightColorTwo"
+  "#6ee4f8": "iconAccent",
+  "#1785ff": "iconAccentCompliment",
+  "#6e85f8": "iconBaseBlend",
+  "#9a8bff": "iconSecondaryBlend",
+  "#ff8bf5": "iconBlendCompliment",
+  "#ff958b": "iconDiversification",
+  "#e62d94": "iconError"
 }
