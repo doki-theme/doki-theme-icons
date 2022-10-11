@@ -120,6 +120,7 @@ type LayeredSVGSpec = {
   fill?: string;
   scale?: number;
   newName?: string;
+  includeName?: boolean;
 };
 
 const namedColors: StringDictionary<string> = JSON.parse(fs.readFileSync(
@@ -194,7 +195,9 @@ walkDir(exportedIconsDir)
                 layeredSVG: svgAsXML,
               };
             } else {
-              currentSVG.fileName += `_${resolvedFileName}`;
+              if(nextSVGSpec.includeName !== false) {
+                currentSVG.fileName += `_${resolvedFileName}`;
+              }
               const nonBaseGuts = processSVG(svgAsXML, nextSVGSpec);
 
               currentSVG.layeredSVG.svg.$$.push(nonBaseGuts);

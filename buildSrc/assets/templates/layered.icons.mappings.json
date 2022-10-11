@@ -36,6 +36,17 @@
     },
     {
       "name": "heart.svg",
+      "includeName": false,
+      "position": "UPPER_RIGHT",
+      "scale": 0.75,
+      "margin": {
+        "y": -4.5,
+        "x": 2.4
+      },
+      "fill": "#000000"
+    },
+    {
+      "name": "heart.svg",
       "position": "UPPER_RIGHT",
       "scale": 0.55,
       "margin": {
@@ -46,6 +57,17 @@
   [
     {
       "name": "notifications.svg"
+    },
+    {
+      "name": "heart.svg",
+      "includeName": false,
+      "position": "UPPER_RIGHT",
+      "scale": 0.75,
+      "margin": {
+        "y": -4.5,
+        "x": 2.4
+      },
+      "fill": "#000000"
     },
     {
       "name": "heart.svg",
@@ -122,6 +144,13 @@
   [
     {
       "name": "cupcake.svg"
+    },
+    {
+      "name": "circle.svg",
+      "includeName": false,
+      "position": "LOWER_RIGHT",
+      "fill": "#000000",
+      "scale": 0.65
     },
     {
       "name": "refresh.svg",
