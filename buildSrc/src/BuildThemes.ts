@@ -1,4 +1,4 @@
-import { resolvePaths, StringDictionary, walkDir } from "doki-build-source";
+import {resolvePaths, StringDictionary, walkDir} from "doki-build-source";
 import path from "path";
 import xmlParser from "xml2js";
 import * as fs from "fs";
@@ -13,7 +13,7 @@ const parser = new xmlParser.Parser({
 
 const toXml = (xml1: string): Promise<any> => parser.parseStringPromise(xml1);
 
-const { appTemplatesDirectoryPath, masterTemplateDirectoryPath } = resolvePaths(__dirname);
+const {appTemplatesDirectoryPath, masterTemplateDirectoryPath} = resolvePaths(__dirname);
 
 type IconMapping = {
   iconName: string;
@@ -47,7 +47,7 @@ function buildXml(workingCopy: any): string {
 
   constructSVG(root, svg.$$);
 
-  return root.end({ pretty: true });
+  return root.end({pretty: true});
 }
 
 type Anchor =
@@ -65,33 +65,35 @@ const defaultSvgSize = 24;
 
 function getPosition(
   svgPosition: Anchor,
-  scale: number
+  scale: number | XY
 ): { x: number; y: number } {
-  const scaledSVG = defaultSvgSize * scale;
+  const usableScale: number = typeof scale === 'number' ?
+    scale : Math.max(scale.x || defaultSvgSize, scale.y || defaultSvgSize);
+  const scaledSVG = defaultSvgSize * usableScale;
   const delta = defaultSvgSize - scaledSVG;
   switch (svgPosition) {
     case "LOWER_LEFT":
-      return { x: 0, y: delta };
+      return {x: 0, y: delta};
     case "LOWER_RIGHT":
       return {
         x: delta,
         y: delta,
       };
     case "LOWER":
-      return { x: delta / 2, y: delta };
+      return {x: delta / 2, y: delta};
     case "MIDDLE_LEFT":
-      return { x: 0, y: delta / 2 };
+      return {x: 0, y: delta / 2};
     case "MIDDLE":
-      return { x: delta / 2, y: delta / 2 };
+      return {x: delta / 2, y: delta / 2};
     case "MIDDLE_RIGHT":
-      return { x: delta, y: delta / 2 };
+      return {x: delta, y: delta / 2};
     default:
     case "UPPER_LEFT":
-      return { x: 0, y: 0 };
+      return {x: 0, y: 0};
     case "UPPER":
-      return { x: delta / 2, y: 0 };
+      return {x: delta / 2, y: 0};
     case "UPPER_RIGHT":
-      return { x: delta, y: 0 };
+      return {x: delta, y: 0};
   }
 }
 
@@ -110,21 +112,22 @@ function addFill(nonBaseGuts: StringDictionary<any>, fill: string) {
   });
 }
 
+type XY = {
+  x?: number;
+  y?: number;
+};
 type LayeredSVGSpec = {
   name: string;
   position?: Anchor;
-  margin?: {
-    x?: number;
-    y?: number;
-  };
+  margin?: XY;
   fill?: string;
-  scale?: number;
+  scale?: number | XY;
   newName?: string;
   includeName?: boolean;
 };
 
 const namedColors: StringDictionary<string> = JSON.parse(fs.readFileSync(
-  path.join(masterTemplateDirectoryPath, 'base.colors.template.json'),{
+  path.join(masterTemplateDirectoryPath, 'base.colors.template.json'), {
     encoding: 'utf-8',
   }
 )).colors
@@ -137,13 +140,17 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
   };
   const svgPosition = nextSVGSpec.position;
   if (svgPosition) {
-    const scale = nextSVGSpec.scale || 0.5;
-    const { x, y } = getPosition(svgPosition, scale);
+    const {x: scaleX, y: scaleY} =
+      typeof nextSVGSpec.scale === 'number' || nextSVGSpec.scale === undefined ?
+        {x: nextSVGSpec.scale, y: nextSVGSpec.scale} :
+        {x: nextSVGSpec.scale.x, y: nextSVGSpec.scale.y};
+    const defaultSVGSize = 0.5;
+    const {x, y} = getPosition(svgPosition, nextSVGSpec.scale || defaultSVGSize);
     nonBaseGuts.$ = {
       ...nonBaseGuts.$,
       transform: `translate(${x + (nextSVGSpec.margin?.x || 0)} ${
         y + (nextSVGSpec.margin?.y || 0)
-      }) scale(${scale} ${scale})`,
+      }) scale(${scaleX || defaultSVGSize} ${scaleY || defaultSVGSize})`,
     };
   }
 
@@ -172,9 +179,7 @@ walkDir(exportedIconsDir)
     );
 
     for (const iconLayers of layeredIcons) {
-      const { fileName, layeredSVG } = await iconLayers.reduce<
-        Promise<{ fileName: string; layeredSVG: any }>
-      >(
+      const {fileName, layeredSVG} = await iconLayers.reduce<Promise<{ fileName: string; layeredSVG: any }>>(
         (currentSVGPromise, nextSVGSpec) =>
           currentSVGPromise.then(async (currentSVG) => {
             const svgName = nextSVGSpec.name;
@@ -183,7 +188,7 @@ walkDir(exportedIconsDir)
               throw new Error(`Hey silly, you forgot to export ${svgName}`);
             }
             const svgAsXML = await toXml(
-              fs.readFileSync(exportedPath, { encoding: "utf-8" })
+              fs.readFileSync(exportedPath, {encoding: "utf-8"})
             );
             const fileName = svgName.substring(0, svgName.lastIndexOf(".svg"));
             const resolvedFileName = nextSVGSpec.newName || fileName;
@@ -195,7 +200,7 @@ walkDir(exportedIconsDir)
                 layeredSVG: svgAsXML,
               };
             } else {
-              if(nextSVGSpec.includeName !== false) {
+              if (nextSVGSpec.includeName !== false) {
                 currentSVG.fileName += `_${resolvedFileName}`;
               }
               const nonBaseGuts = processSVG(svgAsXML, nextSVGSpec);
@@ -204,13 +209,13 @@ walkDir(exportedIconsDir)
               return currentSVG;
             }
           }),
-        Promise.resolve({ fileName: "", layeredSVG: undefined })
+        Promise.resolve({fileName: "", layeredSVG: undefined})
       );
 
       fs.writeFileSync(
         path.join(generatedIconsDir, `${fileName}.svg`),
         buildXml(layeredSVG),
-        { encoding: "utf-8" }
+        {encoding: "utf-8"}
       );
     }
 
@@ -232,7 +237,7 @@ walkDir(exportedIconsDir)
       }
 
       const svgAsXML = await toXml(
-        fs.readFileSync(svgPath, { encoding: "utf-8" })
+        fs.readFileSync(svgPath, {encoding: "utf-8"})
       );
       iconMapping.sizes.forEach((iconSize) => {
         const workingCopy = deepClone(svgAsXML);

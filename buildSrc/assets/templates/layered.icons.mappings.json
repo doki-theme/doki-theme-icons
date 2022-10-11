@@ -102,6 +102,19 @@
       "name": "test_outline.svg"
     },
     {
+      "name": "circle.svg",
+      "includeName": false,
+      "position": "LOWER_RIGHT",
+      "fill": "#000000",
+      "margin": {
+        "y": 4.5
+      },
+      "scale": {
+        "x": 0.65,
+        "y": 0.45
+      }
+    },
+    {
       "name": "view_filled.svg",
       "position": "LOWER_RIGHT",
       "scale": 0.65,
@@ -113,6 +126,19 @@
   [
     {
       "name": "tada.svg"
+    },
+    {
+      "name": "circle.svg",
+      "includeName": false,
+      "position": "LOWER_RIGHT",
+      "fill": "#000000",
+      "margin": {
+        "y": 4.5
+      },
+      "scale": {
+        "x": 0.65,
+        "y": 0.45
+      }
     },
     {
       "name": "view_filled.svg",
@@ -161,6 +187,13 @@
   [
     {
       "name": "pretzel.svg"
+    },
+    {
+      "name": "circle.svg",
+      "includeName": false,
+      "position": "LOWER_RIGHT",
+      "fill": "#000000",
+      "scale": 0.75
     },
     {
       "name": "refresh.svg",
