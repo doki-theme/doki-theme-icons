@@ -97,7 +97,7 @@ function getPosition(
   }
 }
 
-function addFill(nonBaseGuts: StringDictionary<any>, fill: string) {
+function addFill(nonBaseGuts: StringDictionary<any>, fillProvider: (color: string) => string) {
   if (!nonBaseGuts) {
     return;
   }
@@ -105,10 +105,10 @@ function addFill(nonBaseGuts: StringDictionary<any>, fill: string) {
   if (!nonBaseGuts.$) {
     nonBaseGuts.$ = {};
   }
-  nonBaseGuts.$.fill = fill;
+  nonBaseGuts.$.fill = fillProvider(nonBaseGuts.$.fill);
 
   (nonBaseGuts.$$ || []).forEach((item: any) => {
-    addFill(item, fill);
+    addFill(item, fillProvider);
   });
 }
 
@@ -121,7 +121,7 @@ type LayeredSVGSpec = {
   displayName?: string;
   position?: Anchor;
   margin?: XY;
-  fill?: string;
+  fill?: string | StringDictionary<string>;
   scale?: number | XY;
   newName?: string;
   includeName?: boolean;
@@ -132,6 +132,17 @@ const namedColors: StringDictionary<string> = JSON.parse(fs.readFileSync(
     encoding: 'utf-8',
   }
 )).colors
+
+const hexToNamedIconColor: StringDictionary<string> = JSON.parse(fs.readFileSync(
+  path.join(appTemplatesDirectoryPath, 'icon.palette.template.json'), {
+    encoding: 'utf-8',
+  }
+))
+const namedIconColorToHex = Object.entries(hexToNamedIconColor)
+  .reduce<StringDictionary<string>>((accum, [hex, namedColor]) => {
+    accum[namedColor] = hex;
+    return accum;
+  }, {})
 
 function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
   const nonBaseGuts = {
@@ -156,8 +167,22 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
   }
 
   const fill = nextSVGSpec.fill;
+  const fillProvider: (color: string) => string = typeof fill === 'string' ?
+    () => hexToNamedIconColor[fill] || namedIconColorToHex[fill] || fill :
+    (color) => {
+      if (typeof fill === 'object') {
+        const namedColorMapping = hexToNamedIconColor[color];
+        const newColor = fill[namedColorMapping];
+        if (namedColorMapping && newColor) {
+          return newColor.startsWith('#') ?
+            newColor :
+            namedIconColorToHex[newColor] || color
+        }
+      }
+      return color
+    }
   if (fill) {
-    addFill(nonBaseGuts, namedColors[fill] || fill);
+    addFill(nonBaseGuts, fillProvider);
   }
   return nonBaseGuts;
 }

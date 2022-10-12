@@ -249,5 +249,30 @@
         "x": 2.5
       }
     }
+  ],
+  [
+    {
+      "name": "folder.svg",
+      "displayName": "sourceRoot",
+      "fill": {
+        "iconAccent": "iconAccentCompliment",
+        "iconAccentCompliment": "iconAccent"
+      }
+    }
+  ],
+  [
+    {
+      "name": "folder.svg",
+      "displayName": "excludedFolder"
+    },
+    {
+      "name": "close.svg",
+      "position": "MIDDLE",
+      "scale": 0.5,
+      "fill": "iconError",
+      "margin": {
+        "y": 1.3
+      }
+    }
   ]
 ]
