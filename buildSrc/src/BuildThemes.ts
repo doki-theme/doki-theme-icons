@@ -97,7 +97,7 @@ function getPosition(
   }
 }
 
-function addFill(nonBaseGuts: StringDictionary<any>, fillProvider: (color: string) => string) {
+function addAttributes(nonBaseGuts: StringDictionary<any>, attributeProvider: (node: any) => void) {
   if (!nonBaseGuts) {
     return;
   }
@@ -105,10 +105,11 @@ function addFill(nonBaseGuts: StringDictionary<any>, fillProvider: (color: strin
   if (!nonBaseGuts.$) {
     nonBaseGuts.$ = {};
   }
-  nonBaseGuts.$.fill = fillProvider(nonBaseGuts.$.fill);
+
+  attributeProvider(nonBaseGuts.$);
 
   (nonBaseGuts.$$ || []).forEach((item: any) => {
-    addFill(item, fillProvider);
+    addAttributes(item, attributeProvider);
   });
 }
 
@@ -123,15 +124,10 @@ type LayeredSVGSpec = {
   margin?: XY;
   fill?: string | StringDictionary<string>;
   scale?: number | XY;
+  opacity?: number;
   newName?: string;
   includeName?: boolean;
 };
-
-const namedColors: StringDictionary<string> = JSON.parse(fs.readFileSync(
-  path.join(masterTemplateDirectoryPath, 'base.colors.template.json'), {
-    encoding: 'utf-8',
-  }
-)).colors
 
 const hexToNamedIconColor: StringDictionary<string> = JSON.parse(fs.readFileSync(
   path.join(appTemplatesDirectoryPath, 'icon.palette.template.json'), {
@@ -181,9 +177,20 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
       }
       return color
     }
-  if (fill) {
-    addFill(nonBaseGuts, fillProvider);
+  const opacity = nextSVGSpec.opacity
+  if (fill || opacity) {
+    addAttributes(nonBaseGuts, node => {
+      if (fill) {
+        node.fill = fillProvider(node.fill);
+      }
+
+      if (opacity) {
+        node.opacity = opacity;
+      }
+    });
   }
+
+
   return nonBaseGuts;
 }
 

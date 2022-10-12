@@ -263,13 +263,14 @@
   [
     {
       "name": "folder.svg",
+      "opacity": 0.8,
       "displayName": "excludedFolder"
     },
     {
       "name": "close.svg",
       "position": "MIDDLE",
-      "scale": 0.5,
-      "fill": "iconError",
+      "scale": 0.6,
+      "fill": "#000000",
       "margin": {
         "y": 1.3
       }
