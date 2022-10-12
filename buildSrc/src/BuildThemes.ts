@@ -118,6 +118,7 @@ type XY = {
 };
 type LayeredSVGSpec = {
   name: string;
+  displayName?: string;
   position?: Anchor;
   margin?: XY;
   fill?: string;
@@ -161,6 +162,7 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
   return nonBaseGuts;
 }
 
+type LayeredIconResult = { fileName: string; layeredSVG: any, displayName: string };
 walkDir(exportedIconsDir)
   .then(async (icons) => {
     const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
@@ -179,9 +181,9 @@ walkDir(exportedIconsDir)
     );
 
     for (const iconLayers of layeredIcons) {
-      const {fileName, layeredSVG} = await iconLayers.reduce<Promise<{ fileName: string; layeredSVG: any }>>(
+      const {fileName, layeredSVG, displayName} = await iconLayers.reduce<Promise<LayeredIconResult>>(
         (currentSVGPromise, nextSVGSpec) =>
-          currentSVGPromise.then(async (currentSVG) => {
+          currentSVGPromise.then(async (currentSVG: LayeredIconResult) => {
             const svgName = nextSVGSpec.name;
             const exportedPath = svgNameToPatho[svgName];
             if (!exportedPath) {
@@ -198,8 +200,10 @@ walkDir(exportedIconsDir)
               return {
                 fileName: resolvedFileName,
                 layeredSVG: svgAsXML,
-              };
+                displayName: nextSVGSpec.displayName || currentSVG.displayName
+              } as LayeredIconResult;
             } else {
+              currentSVG.displayName = nextSVGSpec.displayName || currentSVG.displayName
               if (nextSVGSpec.includeName !== false) {
                 currentSVG.fileName += `_${resolvedFileName}`;
               }
@@ -209,11 +213,11 @@ walkDir(exportedIconsDir)
               return currentSVG;
             }
           }),
-        Promise.resolve({fileName: "", layeredSVG: undefined})
+        Promise.resolve<LayeredIconResult>({fileName: "", layeredSVG: undefined, displayName: ""})
       );
 
       fs.writeFileSync(
-        path.join(generatedIconsDir, `${fileName}.svg`),
+        path.join(generatedIconsDir, `${displayName || fileName}.svg`),
         buildXml(layeredSVG),
         {encoding: "utf-8"}
       );

@@ -208,5 +208,46 @@
       "scale": 0.75,
       "position": "MIDDLE"
     }
+  ],
+  [
+    {
+      "name": "folder.svg"
+    },
+    {
+      "name": "heart.svg",
+      "includeName": false,
+      "position": "LOWER_RIGHT",
+      "scale": 0.75,
+      "margin": {
+        "y": 2.75,
+        "x": 2.8
+      },
+      "fill": "#000000"
+    },
+    {
+      "name": "heart.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.60,
+      "margin": {
+        "y": 1.25,
+        "x": 1.0
+      }
+    }
+  ],
+  [
+    {
+      "name": "folder.svg",
+      "displayName": "package"
+    },
+    {
+      "name": "heart.svg",
+      "position": "MIDDLE_LEFT",
+      "scale": 0.5,
+      "fill": "#000000",
+      "margin": {
+        "y": 1.5,
+        "x": 2.5
+      }
+    }
   ]
 ]
