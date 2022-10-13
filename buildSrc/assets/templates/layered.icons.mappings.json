@@ -36,19 +36,13 @@
     },
     {
       "name": "heart.svg",
-      "includeName": false,
-      "position": "UPPER_RIGHT",
-      "scale": 0.75,
-      "margin": {
-        "y": -4.5,
-        "x": 2.4
-      },
-      "fill": "#000000"
-    },
-    {
-      "name": "heart.svg",
       "position": "UPPER_RIGHT",
       "scale": 0.55,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      },
       "margin": {
         "y": -2.5
       }
@@ -60,18 +54,12 @@
     },
     {
       "name": "heart.svg",
-      "includeName": false,
       "position": "UPPER_RIGHT",
-      "scale": 0.75,
-      "margin": {
-        "y": -4.5,
-        "x": 2.4
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
       },
-      "fill": "#000000"
-    },
-    {
-      "name": "heart.svg",
-      "position": "UPPER_RIGHT",
       "scale": 0.55,
       "margin": {
         "y": -2.5
@@ -85,7 +73,12 @@
     {
       "name": "play_solid.svg",
       "position": "LOWER_RIGHT",
-      "fill": "#ff0000"
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      },
+      "fill": "iconAccentCompliment"
     }
   ],
   [

@@ -37,22 +37,38 @@
     },
     {
       "name": "heart.svg",
-      "includeName": false,
-      "position": "LOWER_RIGHT",
-      "scale": 0.75,
-      "margin": {
-        "y": 2.75,
-        "x": 2.8
-      },
-      "fill": "#000000"
-    },
-    {
-      "name": "heart.svg",
       "position": "LOWER_RIGHT",
       "scale": 0.60,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      },
       "margin": {
         "y": 1.25,
         "x": 1.0
+      }
+    }
+  ],
+  [
+    {
+      "name": "folder.svg"
+    },
+    {
+      "name": "test.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "fill": {
+        "iconAccent": "iconBaseBlend",
+        "iconAccentCompliment": "iconBlendCompliment"
+      },
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      },
+      "margin": {
+        "x": 2.5
       }
     }
   ]

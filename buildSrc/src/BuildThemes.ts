@@ -127,6 +127,12 @@ type LayeredSVGSpec = {
   opacity?: number;
   newName?: string;
   includeName?: boolean;
+  stroke?: {
+    color: string;
+    thiccness: number;
+    location?: 'inner' | 'center' | 'outer'
+  };
+
 };
 
 const hexToNamedIconColor: StringDictionary<string> = JSON.parse(fs.readFileSync(
@@ -140,7 +146,7 @@ const namedIconColorToHex = Object.entries(hexToNamedIconColor)
     return accum;
   }, {})
 
-function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
+function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec): any[] {
   const nonBaseGuts = {
     $: {},
     "#name": "g",
@@ -190,8 +196,18 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec) {
     });
   }
 
+  const svgStroke = nextSVGSpec.stroke;
+  if (svgStroke) {
+    const lowerClone = deepClone(nonBaseGuts);
+    addAttributes(lowerClone, node => {
+      node.stroke = svgStroke.color;
+      node['stroke-width'] = svgStroke.thiccness;
+      node['stroke-alignment'] = svgStroke.location || 'center';
+    })
+    return [lowerClone, nonBaseGuts]
+  }
 
-  return nonBaseGuts;
+  return [nonBaseGuts];
 }
 
 class SVGSupplier {
@@ -227,7 +243,7 @@ async function performLayeredSVGWork(mappingsFile: string, svgSupplier: SVGSuppl
             const resolvedFileName = nextSVGSpec.newName || fileName;
             if (!currentSVG.layeredSVG) {
               const svgGuy = svgAsXML.svg;
-              svgGuy.$$ = [processSVG(svgAsXML, nextSVGSpec)];
+              svgGuy.$$ = processSVG(svgAsXML, nextSVGSpec);
               return {
                 fileName: resolvedFileName,
                 layeredSVG: svgAsXML,
@@ -240,7 +256,9 @@ async function performLayeredSVGWork(mappingsFile: string, svgSupplier: SVGSuppl
               }
               const nonBaseGuts = processSVG(svgAsXML, nextSVGSpec);
 
-              currentSVG.layeredSVG.svg.$$.push(nonBaseGuts);
+              nonBaseGuts.forEach(guts =>
+                currentSVG.layeredSVG.svg.$$.push(guts)
+              )
               return currentSVG;
             }
           }),
