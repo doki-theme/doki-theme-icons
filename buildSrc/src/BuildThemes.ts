@@ -213,6 +213,49 @@ class SVGSupplier {
 }
 
 type LayeredIconResult = { fileName: string; layeredSVG: any, displayName: string };
+
+async function performLayeredSVGWork(mappingsFile: string, svgSupplier: SVGSupplier) {
+  await performWork<LayeredSVGSpec[]>(
+    mappingsFile,
+    async (iconLayers) => {
+      const {fileName, layeredSVG, displayName} = await iconLayers.reduce<Promise<LayeredIconResult>>(
+        (currentSVGPromise, nextSVGSpec) =>
+          currentSVGPromise.then(async (currentSVG: LayeredIconResult) => {
+            const svgName = nextSVGSpec.name;
+            const svgAsXML = await svgSupplier.getSVGAsXml(svgName)
+            const fileName = svgName.substring(0, svgName.lastIndexOf(".svg"));
+            const resolvedFileName = nextSVGSpec.newName || fileName;
+            if (!currentSVG.layeredSVG) {
+              const svgGuy = svgAsXML.svg;
+              svgGuy.$$ = [processSVG(svgAsXML, nextSVGSpec)];
+              return {
+                fileName: resolvedFileName,
+                layeredSVG: svgAsXML,
+                displayName: nextSVGSpec.displayName || currentSVG.displayName
+              } as LayeredIconResult;
+            } else {
+              currentSVG.displayName = nextSVGSpec.displayName || currentSVG.displayName
+              if (nextSVGSpec.includeName !== false) {
+                currentSVG.fileName += `_${resolvedFileName}`;
+              }
+              const nonBaseGuts = processSVG(svgAsXML, nextSVGSpec);
+
+              currentSVG.layeredSVG.svg.$$.push(nonBaseGuts);
+              return currentSVG;
+            }
+          }),
+        Promise.resolve<LayeredIconResult>({fileName: "", layeredSVG: undefined, displayName: ""})
+      );
+
+      fs.writeFileSync(
+        path.join(generatedIconsDir, `${displayName || fileName}.svg`),
+        buildXml(layeredSVG),
+        {encoding: "utf-8"}
+      );
+    }
+  )
+}
+
 walkDir(exportedIconsDir)
   .then(async (icons) => {
     const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
@@ -222,45 +265,8 @@ walkDir(exportedIconsDir)
     }, {} as StringDictionary<string>);
     const svgSupplier = new SVGSupplier(svgNameToPatho);
 
-    await performWork<LayeredSVGSpec[]>(
-      "layered.icons.mappings.json",
-      async (iconLayers) => {
-        const {fileName, layeredSVG, displayName} = await iconLayers.reduce<Promise<LayeredIconResult>>(
-          (currentSVGPromise, nextSVGSpec) =>
-            currentSVGPromise.then(async (currentSVG: LayeredIconResult) => {
-              const svgName = nextSVGSpec.name;
-              const svgAsXML = await svgSupplier.getSVGAsXml(svgName)
-              const fileName = svgName.substring(0, svgName.lastIndexOf(".svg"));
-              const resolvedFileName = nextSVGSpec.newName || fileName;
-              if (!currentSVG.layeredSVG) {
-                const svgGuy = svgAsXML.svg;
-                svgGuy.$$ = [processSVG(svgAsXML, nextSVGSpec)];
-                return {
-                  fileName: resolvedFileName,
-                  layeredSVG: svgAsXML,
-                  displayName: nextSVGSpec.displayName || currentSVG.displayName
-                } as LayeredIconResult;
-              } else {
-                currentSVG.displayName = nextSVGSpec.displayName || currentSVG.displayName
-                if (nextSVGSpec.includeName !== false) {
-                  currentSVG.fileName += `_${resolvedFileName}`;
-                }
-                const nonBaseGuts = processSVG(svgAsXML, nextSVGSpec);
-
-                currentSVG.layeredSVG.svg.$$.push(nonBaseGuts);
-                return currentSVG;
-              }
-            }),
-          Promise.resolve<LayeredIconResult>({fileName: "", layeredSVG: undefined, displayName: ""})
-        );
-
-        fs.writeFileSync(
-          path.join(generatedIconsDir, `${displayName || fileName}.svg`),
-          buildXml(layeredSVG),
-          {encoding: "utf-8"}
-        );
-      }
-    )
+    await performLayeredSVGWork("layered.icons.mappings.json", svgSupplier);
+    await performLayeredSVGWork("layered.folders.icon.mappings.json", svgSupplier);
 
     await performWork<IconMapping>(
       "jetbrains.mappings.json",
