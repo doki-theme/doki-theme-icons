@@ -148,7 +148,13 @@
     },
     {
       "name": "config.svg",
-      "position": "LOWER_RIGHT"
+      "position": "LOWER_RIGHT",
+      "fill": "iconSecondaryBlend",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
     }
   ],
   [

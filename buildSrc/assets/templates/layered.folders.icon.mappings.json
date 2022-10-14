@@ -71,6 +71,41 @@
         "x": 2.5
       }
     }
+  ],
+  [
+    {
+      "name": "folder.svg"
+    },
+    {
+      "name": "cowfee.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      },
+      "margin": {
+        "x": 2.5
+      }
+    }
+  ],
+  [
+    {
+      "name": "folder.svg"
+    },
+    {
+      "name": "library.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      },
+      "margin": {
+        "x": 2.5
+      }
+    }
   ]
-
 ]

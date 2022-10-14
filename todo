@@ -210,9 +210,17 @@ maven /images/updateFolders.svg
 /nodes/method.svg
 
 
-/modules/sourceRoot.svg
-/modules/excludeRoot.svg
+/modules/sourceRoot.svg ✅
+/modules/excludeRoot.svg ✅
 
+/vcs/ignore_file.svg (ignore)
+/nodes/ppJdk.svg (folder with cowfee) ✅
+/nodes/ppLibFolder.svg (folder with lib) ✅
+/nodes/ppJar.svg ✅
+/fileTypes/text.svg (file) ✅
+/icons/shFile.svg (terminal) ✅
+/fileTypes/properties.svg (file/config) ✅
+/fileTypes/json.svg ✅
 
 
 JUNIT test mark
