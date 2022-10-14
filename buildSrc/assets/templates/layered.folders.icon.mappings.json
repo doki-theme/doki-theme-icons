@@ -86,7 +86,7 @@
         "location": "outside"
       },
       "margin": {
-        "x": 2.5
+        "x": 1
       }
     }
   ],
@@ -104,7 +104,7 @@
         "location": "outside"
       },
       "margin": {
-        "x": 2.5
+        "x": 1
       }
     }
   ]

@@ -217,5 +217,20 @@
         "iconAccentCompliment": "iconAccent"
       }
     }
+  ],
+  [
+    {
+      "name": "doki_icon.svg"
+    },
+    {
+      "name": "config.svg",
+      "position": "LOWER_RIGHT",
+      "fill": "iconSecondaryBlend",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
+    }
   ]
 ]

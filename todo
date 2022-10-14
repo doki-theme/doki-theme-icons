@@ -177,14 +177,12 @@ change list /vcs/changelist.svg
 /nodes/ppLibFolder.svg
 /actions/run_anything.svg
 /runConfigurations/sortbyDuration.svg
-/nodes/moduleGroup.svg
-/actions/dependencyAnalyzer.svg
+/actions/dependencyAnalyzer.svg (mag glass with onigiri)
 /actions/offlineMode.svg
 /general/balloonInformation.svg
 /icons/IntelliSort.svg
 /actions/GroupByPackage.svg
 /vcs/fetch.svg (re think, is same as update project)
-/nodes/moduleGroup.svg
 /ide/localScope.svg
 /general/fitContent.svg
 /actions/newFolder.svg
@@ -213,7 +211,11 @@ maven /images/updateFolders.svg
 /modules/sourceRoot.svg ✅
 /modules/excludeRoot.svg ✅
 
+/actions/scratch.svg
 /vcs/ignore_file.svg (ignore)
+/modules/resourcesRoot.svg
+/nodes/configFolder.svg
+/nodes/moduleGroup.svg
 /nodes/ppJdk.svg (folder with cowfee) ✅
 /nodes/ppLibFolder.svg (folder with lib) ✅
 /nodes/ppJar.svg ✅
@@ -221,6 +223,37 @@ maven /images/updateFolders.svg
 /icons/shFile.svg (terminal) ✅
 /fileTypes/properties.svg (file/config) ✅
 /fileTypes/json.svg ✅
+
+
+
+files
+------
+/nodes/ideaModule.svg
+/icons/fileTypes/TypeScriptFile.svg
+/fileTypes/xml.svg
+/fileTypes/javaScript.svg
+/icons/MarkdownPlugin.svg
+/com/intellij/ws/rest/client/icons/http_requests_filetype.svg
+/icons/groovy/groovy_16x16.svg
+/org/jetbrains/kotlin/idea/icons/kotlin_file.svg
+/org/jetbrains/kotlin/idea/icons/kotlin_script.svg
+/fileTypes/html.svg
+/fileTypes/manifest.svg
+/fileTypes/javaClass.svg
+
+
+Glyphs
+---
+/nodes/interface.svg
+/org/jetbrains/kotlin/idea/icons/classKotlin.svg
+/nodes/annotationtype.svg
+/org/jetbrains/kotlin/idea/icons/annotationKotlin.svg
+/nodes/abstractClass.svg
+/org/jetbrains/kotlin/idea/icons/abstractClassKotlin.svg
+/org/jetbrains/kotlin/idea/icons/objectKotlin.svg
+/org/jetbrains/kotlin/idea/icons/interfaceKotlin.svg
+/org/jetbrains/kotlin/idea/icons/enumKotlin.svg
+/nodes/enum.svg
 
 
 JUNIT test mark
