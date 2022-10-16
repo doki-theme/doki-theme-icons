@@ -123,6 +123,9 @@ type LayeredSVGSpec = {
   position?: Anchor;
   margin?: XY;
   fill?: string | StringDictionary<string>;
+  force?: {
+    fill?: boolean
+  };
   scale?: number | XY;
   opacity?: number;
   newName?: string;
@@ -188,7 +191,8 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec): any[] {
     addAttributes(nonBaseGuts, node => {
       if (fill) {
         const fillToUse = fillProvider(node.fill);
-        if (node.fill && node.fill !== 'none') {
+        if (node.fill && node.fill !== 'none' ||
+          nextSVGSpec.force?.fill === true) {
           node.fill = fillToUse;
         }
         if (node.stroke && node.stroke !== 'none') {

@@ -133,6 +133,9 @@
     },
     {
       "name": "circle.svg",
+      "force": {
+        "fill": true
+      },
       "includeName": false,
       "position": "LOWER_RIGHT",
       "fill": "#000000",

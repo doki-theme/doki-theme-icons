@@ -96,6 +96,9 @@
     },
     {
       "name": "circle.svg",
+      "force": {
+        "fill": true
+      },
       "includeName": false,
       "position": "LOWER_RIGHT",
       "fill": "#000000",
@@ -122,6 +125,9 @@
     },
     {
       "name": "circle.svg",
+      "force": {
+        "fill": true
+      },
       "includeName": false,
       "position": "LOWER_RIGHT",
       "fill": "#000000",
@@ -173,6 +179,9 @@
     {
       "name": "circle.svg",
       "includeName": false,
+      "force": {
+        "fill": true
+      },
       "position": "LOWER_RIGHT",
       "fill": "#000000",
       "scale": 0.65
@@ -189,6 +198,9 @@
     },
     {
       "name": "circle.svg",
+      "force": {
+        "fill": true
+      },
       "includeName": false,
       "position": "LOWER_RIGHT",
       "fill": "#000000",
