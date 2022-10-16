@@ -230,14 +230,14 @@ files
 ------
 /nodes/ideaModule.svg
 /icons/fileTypes/TypeScriptFile.svg
-/fileTypes/xml.svg
+/fileTypes/xml.svg ✅
 /fileTypes/javaScript.svg
 /icons/MarkdownPlugin.svg
 /com/intellij/ws/rest/client/icons/http_requests_filetype.svg
 /icons/groovy/groovy_16x16.svg
 /org/jetbrains/kotlin/idea/icons/kotlin_file.svg
 /org/jetbrains/kotlin/idea/icons/kotlin_script.svg
-/fileTypes/html.svg
+/fileTypes/html.svg ✅
 /fileTypes/manifest.svg
 /fileTypes/javaClass.svg
 
@@ -256,6 +256,7 @@ Glyphs
 /gutter/recursiveMethod.svg ✅
 /nodes/lambda.svg ✅
 /nodes/method.svg ✅
+/nodes/exceptionClass.svg ✅
 /org/jetbrains/kotlin/idea/icons/objectKotlin.svg
 /nodes/field.svg
 
