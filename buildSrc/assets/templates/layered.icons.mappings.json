@@ -232,5 +232,77 @@
         "location": "outside"
       }
     }
+  ],
+  [
+    {
+      "name": "neko_glyph.svg"
+    },
+    {
+      "name": "kotlin.svg",
+      "position": "LOWER_RIGHT",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
+    }
+  ],
+  [
+    {
+      "name": "outline_circle_glyph.svg"
+    },
+    {
+      "name": "kotlin.svg",
+      "position": "LOWER_RIGHT",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
+    }
+  ],
+  [
+    {
+      "name": "spiral_glyph.svg"
+    },
+    {
+      "name": "kotlin.svg",
+      "position": "LOWER_RIGHT",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
+    }
+  ],
+  [
+    {
+      "name": "solid_doki_glyph.svg"
+    },
+    {
+      "name": "kotlin.svg",
+      "position": "LOWER_RIGHT",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
+    }
+  ],
+  [
+    {
+      "name": "outline_rectangle_glyph.svg"
+    },
+    {
+      "name": "kotlin.svg",
+      "position": "LOWER_RIGHT",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
+    }
   ]
+
+
 ]

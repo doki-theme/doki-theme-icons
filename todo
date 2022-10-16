@@ -245,18 +245,19 @@ files
 Glyphs
 ---
 /nodes/interface.svg ✅
-/org/jetbrains/kotlin/idea/icons/classKotlin.svg
-/nodes/annotationtype.svg
-/org/jetbrains/kotlin/idea/icons/annotationKotlin.svg
+/org/jetbrains/kotlin/idea/icons/classKotlin.svg ✅
+/nodes/annotationtype.svg ✅
+/org/jetbrains/kotlin/idea/icons/annotationKotlin.svg ✅
 /nodes/abstractClass.svg ✅
-/org/jetbrains/kotlin/idea/icons/abstractClassKotlin.svg
-/org/jetbrains/kotlin/idea/icons/objectKotlin.svg
-/org/jetbrains/kotlin/idea/icons/interfaceKotlin.svg
-/org/jetbrains/kotlin/idea/icons/enumKotlin.svg
-/nodes/enum.svg
+/org/jetbrains/kotlin/idea/icons/abstractClassKotlin.svg ✅
+/org/jetbrains/kotlin/idea/icons/interfaceKotlin.svg ✅
+/org/jetbrains/kotlin/idea/icons/enumKotlin.svg ✅
+/nodes/enum.svg ✅
 /gutter/recursiveMethod.svg ✅
 /nodes/lambda.svg ✅
 /nodes/method.svg ✅
+/org/jetbrains/kotlin/idea/icons/objectKotlin.svg
+/nodes/field.svg
 
 
 JUNIT test mark
