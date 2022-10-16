@@ -1,9 +1,4 @@
-- Action Colors
-	- Select
-	- Running
-	- Stap
 - Base Icon Colors
-- Various Icon colors that compliment the theme.
 - Product Icons
 - File Icon.
 - LICENSE/LICENSE-GRAPHICS
@@ -211,11 +206,11 @@ maven /images/updateFolders.svg
 /modules/sourceRoot.svg ✅
 /modules/excludeRoot.svg ✅
 
-/actions/scratch.svg
 /vcs/ignore_file.svg (ignore)
-/modules/resourcesRoot.svg
-/nodes/configFolder.svg
-/nodes/moduleGroup.svg
+/actions/scratch.svg ✅
+/modules/resourcesRoot.svg ✅
+/nodes/configFolder.svg ✅
+/nodes/moduleGroup.svg ✅
 /nodes/ppJdk.svg (folder with cowfee) ✅
 /nodes/ppLibFolder.svg (folder with lib) ✅
 /nodes/ppJar.svg ✅

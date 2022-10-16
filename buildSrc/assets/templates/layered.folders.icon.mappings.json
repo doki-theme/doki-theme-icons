@@ -107,5 +107,64 @@
         "x": 1
       }
     }
+  ],
+  [
+    {
+      "name": "folder.svg"
+    },
+    {
+      "name": "db_solid.svg",
+      "position": "LOWER_RIGHT",
+      "fill": "iconBlendCompliment",
+      "scale": 0.65,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      },
+      "margin": {
+        "x": 1
+      }
+    }
+  ],
+  [
+    {
+      "name": "folder.svg"
+    },
+    {
+      "name": "circle.svg",
+      "includeName": false,
+      "position": "LOWER_RIGHT",
+      "fill": "#000000",
+      "scale": 0.65,
+      "margin": {
+        "x": 1
+      }
+    },
+    {
+      "name": "settings.svg",
+      "position": "LOWER_RIGHT",
+      "fill": "iconBlendCompliment",
+      "scale": 0.65,
+      "margin": {
+        "x": 1
+      }
+    }
+  ],
+  [
+    {
+      "name": "folder.svg"
+    },
+    {
+      "name": "hex_stack_glyph.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
+    }
   ]
+
 ]
