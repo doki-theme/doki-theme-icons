@@ -187,8 +187,15 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec): any[] {
   if (fill || opacity) {
     addAttributes(nonBaseGuts, node => {
       if (fill) {
-        node.fill = fillProvider(node.fill);
+        const fillToUse = fillProvider(node.fill);
+        if (node.fill && node.fill !== 'none') {
+          node.fill = fillToUse;
+        }
+        if (node.stroke && node.stroke !== 'none') {
+          node.stroke = fillToUse
+        }
       }
+
 
       if (opacity) {
         node.opacity = opacity;
