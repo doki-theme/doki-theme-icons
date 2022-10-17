@@ -256,6 +256,9 @@ Glyphs
 /nodes/field.svg
 
 
+-- one off icons (ex: space)
+
+
 JUNIT test mark
 
 
@@ -286,3 +289,9 @@ F22 Front profile
   - This color works the same as the classname color in providing the extra something.
 - There should be one color that compliments base of the blended compliment
   - Something that works well with the breakpoint's ring.
+
+
+
+Themes not sure about:
+Maika
+Natsuki (blend colorz)
