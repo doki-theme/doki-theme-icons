@@ -253,7 +253,10 @@ Glyphs
 /nodes/method.svg ✅
 /nodes/exceptionClass.svg ✅
 /org/jetbrains/kotlin/idea/icons/objectKotlin.svg
-/nodes/field.svg
+/nodes/field.svg ✅
+variable ✅
+abstract method ✅
+
 
 
 -- one off icons (ex: space)
