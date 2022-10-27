@@ -27,3 +27,4 @@ masterThemes
 *.pyc
 .ipynb_checkpoints/
 icons/generated/
+icons/staging/

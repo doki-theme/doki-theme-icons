@@ -23,6 +23,7 @@ interface IconMapping {
 const iconsDir = path.resolve(__dirname, "..", "..", "icons");
 const exportedIconsDir = path.join(iconsDir, "exported");
 const generatedIconsDir = path.join(iconsDir, "generated");
+const stagingDir = path.join(iconsDir, "staging");
 
 console.log("Preparing to generate icons.");
 
@@ -241,7 +242,11 @@ class SVGSupplier {
 
 type LayeredIconResult = { fileName: string; layeredSVG: any, displayName: string };
 
-async function performLayeredSVGWork(mappingsFile: string, svgSupplier: SVGSupplier) {
+async function performLayeredSVGWork(
+  mappingsFile: string,
+  svgSupplier: SVGSupplier,
+  shouldStage: (layeredSVGSpecs: LayeredSVGSpec[]) => boolean,
+) {
   await performWork<LayeredSVGSpec[]>(
     mappingsFile,
     async (iconLayers) => {
@@ -276,11 +281,20 @@ async function performLayeredSVGWork(mappingsFile: string, svgSupplier: SVGSuppl
         Promise.resolve<LayeredIconResult>({fileName: "", layeredSVG: undefined, displayName: ""})
       );
 
+      const svgName = `${displayName || fileName}.svg`;
+      const data = buildXml(layeredSVG);
       fs.writeFileSync(
-        path.join(generatedIconsDir, `${displayName || fileName}.svg`),
-        buildXml(layeredSVG),
+        path.join(generatedIconsDir, svgName),
+        data,
         {encoding: "utf-8"}
       );
+      if(shouldStage(iconLayers)) {
+        fs.writeFileSync(
+          path.join(stagingDir, svgName),
+          data,
+          {encoding: "utf-8"}
+        );
+      }
     }
   )
 }
@@ -294,8 +308,20 @@ walkDir(exportedIconsDir)
     }, {} as StringDictionary<string>);
     const svgSupplier = new SVGSupplier(svgNameToPatho);
 
-    await performLayeredSVGWork("layered.icons.mappings.json", svgSupplier);
-    await performLayeredSVGWork("layered.folders.icon.mappings.json", svgSupplier);
+    await performLayeredSVGWork(
+      "layered.icons.mappings.json",
+      svgSupplier,
+      (layeredSVGSpecs: LayeredSVGSpec[]) =>
+        layeredSVGSpecs.reduce<boolean>((accum, next) =>{
+          if(accum) {
+            return true
+          }
+          const includeName = next.includeName;
+          const isHide = !includeName && (includeName !== undefined && includeName !== null);
+          return isHide || (next.fill === '#00000') || (!!next.stroke);
+        }, false)
+    );
+    await performLayeredSVGWork("layered.folders.icon.mappings.json", svgSupplier, () => true);
 
     await performWork<IconMapping>(
       "jetbrains.mappings.json",
