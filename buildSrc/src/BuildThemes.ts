@@ -22,6 +22,7 @@ interface IconMapping {
 
 const iconsDir = path.resolve(__dirname, "..", "..", "icons");
 const exportedIconsDir = path.join(iconsDir, "exported");
+const oneOffsIconsDir = path.join(iconsDir, "oneOffs");
 const generatedIconsDir = path.join(iconsDir, "generated");
 const stagingDir = path.join(iconsDir, "staging");
 
@@ -283,26 +284,25 @@ async function performLayeredSVGWork(
 
       const svgName = `${displayName || fileName}.svg`;
       const data = buildXml(layeredSVG);
+      const shouldStageIcon = shouldStage(iconLayers);
       fs.writeFileSync(
-        path.join(generatedIconsDir, svgName),
+        path.join(shouldStageIcon ? stagingDir : generatedIconsDir, svgName),
         data,
         {encoding: "utf-8"}
       );
-      if(shouldStage(iconLayers)) {
-        fs.writeFileSync(
-          path.join(stagingDir, svgName),
-          data,
-          {encoding: "utf-8"}
-        );
-      }
     }
   )
 }
 
-walkDir(exportedIconsDir)
+Promise.all([
+  walkDir(exportedIconsDir),
+  walkDir(stagingDir), // todo: remove me
+  walkDir(oneOffsIconsDir),
+])
+  .then(allIcons => allIcons.reduce((accum, next) => accum.concat(next)))
   .then(async (icons) => {
     const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
-      const svgName = generatedIconPath.substring(exportedIconsDir.length + 1);
+      const svgName = generatedIconPath.substring(generatedIconPath.lastIndexOf(path.sep) + 1);
       accum[svgName] = generatedIconPath;
       return accum;
     }, {} as StringDictionary<string>);
@@ -312,8 +312,8 @@ walkDir(exportedIconsDir)
       "layered.icons.mappings.json",
       svgSupplier,
       (layeredSVGSpecs: LayeredSVGSpec[]) =>
-        layeredSVGSpecs.reduce<boolean>((accum, next) =>{
-          if(accum) {
+        layeredSVGSpecs.reduce<boolean>((accum, next) => {
+          if (accum) {
             return true
           }
           const includeName = next.includeName;
