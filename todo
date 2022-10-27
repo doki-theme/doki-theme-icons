@@ -246,8 +246,6 @@ Glyphs
 /nodes/abstractClass.svg ✅
 /org/jetbrains/kotlin/idea/icons/abstractClassKotlin.svg ✅
 /org/jetbrains/kotlin/idea/icons/interfaceKotlin.svg ✅
-/org/jetbrains/kotlin/idea/icons/enumKotlin.svg ✅
-/nodes/enum.svg ✅
 /gutter/recursiveMethod.svg ✅
 /nodes/lambda.svg ✅
 /nodes/method.svg ✅
@@ -256,29 +254,37 @@ Glyphs
 /nodes/field.svg ✅
 variable ✅
 abstract method ✅
+parameter ✅
+
+/nodes/enum.svg
+/org/jetbrains/kotlin/idea/icons/enumKotlin.svg
 
 
+MVP:
+-- Finish listed glyphs
+-- one off icons (ex: doki, update)
+-- Plugin Icon/Doki Icon
+-- Overlapping icons subtract
+-- Documentation/License/Issues
+-- Publish to channels
 
--- one off icons (ex: space)
-
-
-JUNIT test mark
 
 
 File Icons Ideas:
-Pretzel
-Gumball
 Drop
-Gumdrop
-Cupcake
 Bow
+Snail
 Shell
-Marshmellow
-Cowfee
-Kitty (ears maybe?)
-Horns
 Crown (Queen/King/Tiara)
-F22 Front profile
+Marker
+Octopus
+frog
+Fish
+Flower
+turn-key
+
+
+
 
  Color Ideas:
 
@@ -296,12 +302,5 @@ F22 Front profile
 
 
 Themes not sure about:
-Maika
-Natsuki (blend colorz)
-Ryuko's Dark Theme
-Rory
-Darkness dark
 Xmas Chocola.
-Coconut
-Kurisu
-Gray
+Asuna Dark Contrast

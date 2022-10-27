@@ -296,7 +296,6 @@ async function performLayeredSVGWork(
 
 Promise.all([
   walkDir(exportedIconsDir),
-  walkDir(stagingDir), // todo: remove me
   walkDir(oneOffsIconsDir),
 ])
   .then(allIcons => allIcons.reduce((accum, next) => accum.concat(next)))
