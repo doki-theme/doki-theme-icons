@@ -4,6 +4,14 @@
     "sizes": [13]
   },
   {
+    "iconName": "test.svg",
+    "sizes": [13]
+  },
+  {
+    "iconName": "coverage.svg",
+    "sizes": [13]
+  },
+  {
     "iconName": "notifications_heart.svg",
     "sizes": [13]
   },
