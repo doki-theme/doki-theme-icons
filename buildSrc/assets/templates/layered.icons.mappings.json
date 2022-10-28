@@ -235,12 +235,11 @@
       "name": "doki_icon.svg"
     },
     {
-      "name": "config.svg",
+      "name": "settings.svg",
       "position": "LOWER_RIGHT",
-      "fill": "iconSecondaryBlend",
       "stroke": {
         "color": "#000000",
-        "thiccness": 5,
+        "thiccness": 6,
         "location": "outside"
       }
     }
