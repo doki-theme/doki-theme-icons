@@ -360,7 +360,7 @@ Promise.all([
             return [iconName, `![${iconName}](./icons${iconPath.substring(iconsDir.length)})`];
           }
         ),
-        4
+        3
       )
         .map(stuff => ([
           stuff.map(([name, ]) => name),
