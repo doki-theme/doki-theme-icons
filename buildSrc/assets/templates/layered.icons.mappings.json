@@ -288,7 +288,7 @@
   ],
   [
     {
-      "name": "solid_doki_glyph.svg"
+      "name": "partial_hex_glyph.svg"
     },
     {
       "name": "kotlin.svg",
@@ -302,7 +302,7 @@
   ],
   [
     {
-      "name": "outline_rectangle_glyph.svg"
+      "name": "evaluate_expression.svg"
     },
     {
       "name": "kotlin.svg",
@@ -310,6 +310,20 @@
       "stroke": {
         "color": "#000000",
         "thiccness": 5,
+        "location": "outside"
+      }
+    }
+  ],
+  [
+    {
+      "name": "file.svg"
+    },
+    {
+      "name": "kotlin.svg",
+      "position": "LOWER_RIGHT",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 6,
         "location": "outside"
       }
     }

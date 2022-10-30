@@ -230,12 +230,11 @@ files
 /icons/MarkdownPlugin.svg
 /com/intellij/ws/rest/client/icons/http_requests_filetype.svg
 /icons/groovy/groovy_16x16.svg
-/org/jetbrains/kotlin/idea/icons/kotlin_file.svg
+/org/jetbrains/kotlin/idea/icons/kotlin_file.svg ✅
 /org/jetbrains/kotlin/idea/icons/kotlin_script.svg
 /fileTypes/html.svg ✅
 /fileTypes/manifest.svg
 /fileTypes/javaClass.svg
-
 
 Glyphs
 ---
@@ -256,16 +255,16 @@ variable ✅
 abstract method ✅
 parameter ✅
 
-/nodes/enum.svg
-/org/jetbrains/kotlin/idea/icons/enumKotlin.svg
+/nodes/enum.svg ✅
+/org/jetbrains/kotlin/idea/icons/enumKotlin.svg ✅i
 
 
 MVP:
 -- Finish listed glyphs
 -- one off icons (ex: doki, update)
--- Plugin Icon/Doki Icon
--- Overlapping icons subtract
--- Documentation/License/Issues
+-- Plugin Icon/Doki Icon ✅
+-- Overlapping icons subtract ✅
+-- contributing
 -- Publish to channels
 
 File Icons Ideas:
