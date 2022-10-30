@@ -4,6 +4,8 @@ import xmlParser from "xml2js";
 import * as fs from "fs";
 import deepClone from "lodash/cloneDeep";
 import builder from "xmlbuilder";
+import {chunk, zip} from "lodash";
+import markdownTable from "markdown-table";
 
 const parser = new xmlParser.Parser({
   explicitChildren: true,
@@ -21,6 +23,7 @@ interface IconMapping {
 };
 
 const iconsDir = path.resolve(__dirname, "..", "..", "icons");
+const rootDir = path.resolve(__dirname, "..", "..");
 const exportedIconsDir = path.join(iconsDir, "exported");
 const oneOffsIconsDir = path.join(iconsDir, "oneOffs");
 const generatedIconsDir = path.join(iconsDir, "generated");
@@ -298,7 +301,10 @@ Promise.all([
   walkDir(exportedIconsDir),
   walkDir(oneOffsIconsDir),
 ])
-  .then(allIcons => allIcons.reduce((accum, next) => accum.concat(next)))
+  .then(allIcons => allIcons
+    .reduce((accum, next) => accum.concat(next))
+    .filter(iconPath => iconPath.endsWith('.svg'))
+  )
   .then(async (icons) => {
     const svgNameToPatho = icons.reduce((accum, generatedIconPath) => {
       const svgName = generatedIconPath.substring(generatedIconPath.lastIndexOf(path.sep) + 1);
@@ -343,6 +349,30 @@ Promise.all([
         });
       }
     )
+
+    const iconPreviewMD: string =
+      markdownTable(
+      chunk(
+        Object.entries(svgNameToPatho)
+          .sort(([nameA], [nameB]) => nameA.localeCompare(nameB))
+          .map(
+          ([iconName, iconPath]) => {
+            return [iconName, `![${iconName}](./icons${iconPath.substring(iconsDir.length)})`];
+          }
+        ),
+        4
+      )
+        .map(stuff => ([
+          stuff.map(([name, ]) => name),
+          stuff.map(([, image]) => image),
+        ]))
+        .reduce((accum, next) => accum.concat(next))
+      )
+
+    fs.writeFileSync(path.join(rootDir, 'all_icons.md'), iconPreviewMD, {
+      encoding: "utf-8",
+    });
+
   })
   .then(() => {
     console.log("Icon Generation Complete!");

@@ -7,6 +7,8 @@ Doki Theme Icons
 
 A nice mix of cool and cute icons to compliment your favorite theme!
 
+## [View All Icons](./all_icons.md)
+
 ---
 
 # Documentation
