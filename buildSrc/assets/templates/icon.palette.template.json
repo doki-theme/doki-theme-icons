@@ -6,5 +6,7 @@
   "#ff8bf5": "iconBlendCompliment",
   "#ff958b": "iconDiversification",
   "#73ff9d": "iconBlendContrast",
-  "#e62d94": "iconError"
+  "#e62d94": "iconError",
+  "#1ecd86": "dokiLogoAccent",
+  "#106e49": "dokiLogoAccentContrast"
 }
