@@ -208,7 +208,7 @@ maven /images/updateFolders.svg
 
 /vcs/ignore_file.svg (ignore)
 /actions/scratch.svg ✅
-/modules/resourcesRoot.svg ✅
+/modules/resourcesRoot.svg ✅image
 /nodes/configFolder.svg ✅
 /nodes/moduleGroup.svg ✅
 /nodes/ppJdk.svg (folder with cowfee) ✅

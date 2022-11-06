@@ -327,6 +327,37 @@
         "location": "outside"
       }
     }
-  ]
+  ],
+  [
+    {
+      "name": "file.svg"
+    },
+    {
+      "name": "edit.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      }
+    }
+  ],
 
+  [
+    {
+      "name": "file.svg"
+    },
+    {
+      "name": "close.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.65,
+      "fill": "iconAccent",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      }
+    }
+  ]
 ]
