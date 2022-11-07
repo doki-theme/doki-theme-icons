@@ -168,8 +168,8 @@ bookmark group /nodes/bookmarkGroup.svg
 change list /vcs/changelist.svg
 /vcs/patch_applied.svg
 /objectBrowser/sorted.svg
-/nodes/configFolder.svg
-/nodes/ppLibFolder.svg
+/nodes/configFolder.svg ✅
+/nodes/ppLibFolder.svg ✅
 /actions/run_anything.svg
 /runConfigurations/sortbyDuration.svg
 /actions/dependencyAnalyzer.svg (mag glass with onigiri)
@@ -177,7 +177,7 @@ change list /vcs/changelist.svg
 /general/balloonInformation.svg
 /icons/IntelliSort.svg
 /actions/GroupByPackage.svg
-/vcs/fetch.svg (re think, is same as update project)
+/vcs/fetch.svg (re think, is same as update project) ✅
 /ide/localScope.svg
 /general/fitContent.svg
 /actions/newFolder.svg
@@ -185,10 +185,10 @@ change list /vcs/changelist.svg
 maven /images/pluginGoal.svg (in maven -> plugins -> task)
 maven /images/updateFolders.svg
 /actions/download.svg
-/runConfigurations/showIgnored.svg
+/runConfigurations/showIgnored.svg ✅
 /fileTypes/diagram.svg
 /actions/synchronizeScrolling.svg
-/actions/swapPanels.svg
+/actions/swapPanels.svg ✅
 /actions/editSource.svg
 /toolwindows/documentation.svg
 /icons/springToolWindow.svg
@@ -198,15 +198,15 @@ maven /images/updateFolders.svg
 /general/inspectionsMixed.svg
 /icons/SpringBootHealth.svg
 /img/featureTrainerBanner.svg
-/ide/notification/pluginUpdate.svg
+/ide/notification/pluginUpdate.svg ✅
 
-/nodes/method.svg
+/nodes/method.svg ✅
 
 
 /modules/sourceRoot.svg ✅
 /modules/excludeRoot.svg ✅
 
-/vcs/ignore_file.svg (ignore)
+/vcs/ignore_file.svg (ignore) ✅
 /actions/scratch.svg ✅
 /modules/resourcesRoot.svg ✅image
 /nodes/configFolder.svg ✅
@@ -224,10 +224,10 @@ maven /images/updateFolders.svg
 files
 ------
 /nodes/ideaModule.svg
-/icons/fileTypes/TypeScriptFile.svg
+/icons/fileTypes/TypeScriptFile.svg ✅
 /fileTypes/xml.svg ✅
-/fileTypes/javaScript.svg
-/icons/MarkdownPlugin.svg
+/fileTypes/javaScript.svg ✅
+/icons/MarkdownPlugin.svg ✅
 /com/intellij/ws/rest/client/icons/http_requests_filetype.svg
 /icons/groovy/groovy_16x16.svg
 /org/jetbrains/kotlin/idea/icons/kotlin_file.svg ✅

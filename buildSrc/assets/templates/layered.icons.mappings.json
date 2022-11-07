@@ -87,7 +87,8 @@
     },
     {
       "name": "check.svg",
-      "position": "UPPER_RIGHT"
+      "position": "UPPER_RIGHT",
+      "fill": "iconBlendCompliment"
     }
   ],
   [
