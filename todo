@@ -254,6 +254,7 @@ Glyphs
 variable ✅
 abstract method ✅
 parameter ✅
+nodes/multipleTypeDefinitions.svg
 
 /nodes/enum.svg ✅
 /org/jetbrains/kotlin/idea/icons/enumKotlin.svg ✅i
