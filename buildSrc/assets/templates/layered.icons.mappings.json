@@ -360,5 +360,41 @@
         "location": "outside"
       }
     }
+  ],
+  [
+    {
+      "name": "hex_outline_glyph.svg"
+    },
+    {
+      "name": "chevron_up.svg",
+      "position": "MIDDLE",
+      "scale": 0.65,
+      "fill": "iconBlendCompliment"
+    }
+  ],
+  [
+    {
+      "name": "hex_outline_glyph.svg"
+    },
+    {
+      "name": "chevron_down.svg",
+      "position": "MIDDLE",
+      "scale": 0.65,
+      "fill": "iconBlendCompliment"
+    }
+  ],
+  [
+    {
+      "name": "hex_outline_glyph.svg"
+    },
+    {
+      "name": "circle.svg",
+      "position": "MIDDLE",
+      "scale": 0.35,
+      "fill": "iconBlendCompliment",
+      "force": {
+        "fill": true
+      }
+    }
   ]
 ]
