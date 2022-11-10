@@ -135,6 +135,7 @@ type LayeredSVGSpec = {
   opacity?: number;
   newName?: string;
   includeName?: boolean;
+  shouldStage?: boolean;
   stroke?: {
     color: string;
     thiccness: number;
@@ -321,6 +322,10 @@ Promise.all([
           if (accum) {
             return true
           }
+          if(next.shouldStage !== undefined) {
+            return next.shouldStage;
+          }
+
           const includeName = next.includeName;
           const isHide = !includeName && (includeName !== undefined && includeName !== null);
           return isHide || (next.fill === '#00000') || (!!next.stroke);

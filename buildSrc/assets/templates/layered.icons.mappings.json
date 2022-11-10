@@ -396,5 +396,20 @@
         "fill": true
       }
     }
-  ]
+  ],
+  [
+  {
+    "name": "link.svg",
+    "displayName": "symlink",
+    "position": "UPPER_RIGHT",
+    "scale": 0.45,
+    "shouldStage": false,
+    "stroke": {
+      "color": "#000000",
+      "thiccness": 7,
+      "location": "outside"
+    }
+  }
+
+]
 ]
