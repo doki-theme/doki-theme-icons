@@ -4,7 +4,7 @@ import xmlParser from "xml2js";
 import * as fs from "fs";
 import deepClone from "lodash/cloneDeep";
 import builder from "xmlbuilder";
-import {chunk, zip} from "lodash";
+import {chunk} from "lodash";
 import markdownTable from "markdown-table";
 
 const parser = new xmlParser.Parser({
@@ -20,6 +20,10 @@ const {appTemplatesDirectoryPath, masterTemplateDirectoryPath} = resolvePaths(__
 interface IconMapping {
   iconName: string;
   sizes: number[];
+  fill?: string | StringDictionary<string>;
+  force?: {
+    fill?: boolean
+  };
 };
 
 const iconsDir = path.resolve(__dirname, "..", "..", "icons");
@@ -155,6 +159,45 @@ const namedIconColorToHex = Object.entries(hexToNamedIconColor)
     return accum;
   }, {})
 
+function updateIconFill(fill: string | StringDictionary<string> | undefined,
+                        opacity: number | undefined,
+                        nonBaseGuts: any,
+                        nextSVGSpec: Partial<LayeredSVGSpec>) {
+  const fillProvider: (color: string) => string = typeof fill === 'string' ?
+    () => hexToNamedIconColor[fill] || namedIconColorToHex[fill] || fill :
+    (color) => {
+      if (typeof fill === 'object') {
+        const namedColorMapping = hexToNamedIconColor[color];
+        const newColor = fill[namedColorMapping];
+        if (namedColorMapping && newColor) {
+          return newColor.startsWith('#') ?
+            newColor :
+            namedIconColorToHex[newColor] || color
+        }
+      }
+      return color
+    }
+  if (fill || opacity) {
+    addAttributes(nonBaseGuts, node => {
+      if (fill) {
+        const fillToUse = fillProvider(node.fill);
+        if (node.fill && node.fill !== 'none' ||
+          nextSVGSpec.force?.fill === true) {
+          node.fill = fillToUse;
+        }
+        if (node.stroke && node.stroke !== 'none') {
+          node.stroke = fillToUse
+        }
+      }
+
+
+      if (opacity) {
+        node.opacity = opacity;
+      }
+    });
+  }
+}
+
 function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec): any[] {
   const nonBaseGuts = {
     $: {},
@@ -178,40 +221,8 @@ function processSVG(svgAsXML: any, nextSVGSpec: LayeredSVGSpec): any[] {
   }
 
   const fill = nextSVGSpec.fill;
-  const fillProvider: (color: string) => string = typeof fill === 'string' ?
-    () => hexToNamedIconColor[fill] || namedIconColorToHex[fill] || fill :
-    (color) => {
-      if (typeof fill === 'object') {
-        const namedColorMapping = hexToNamedIconColor[color];
-        const newColor = fill[namedColorMapping];
-        if (namedColorMapping && newColor) {
-          return newColor.startsWith('#') ?
-            newColor :
-            namedIconColorToHex[newColor] || color
-        }
-      }
-      return color
-    }
   const opacity = nextSVGSpec.opacity
-  if (fill || opacity) {
-    addAttributes(nonBaseGuts, node => {
-      if (fill) {
-        const fillToUse = fillProvider(node.fill);
-        if (node.fill && node.fill !== 'none' ||
-          nextSVGSpec.force?.fill === true) {
-          node.fill = fillToUse;
-        }
-        if (node.stroke && node.stroke !== 'none') {
-          node.stroke = fillToUse
-        }
-      }
-
-
-      if (opacity) {
-        node.opacity = opacity;
-      }
-    });
-  }
+  updateIconFill(fill, opacity, nonBaseGuts, nextSVGSpec);
 
   const svgStroke = nextSVGSpec.stroke;
   if (svgStroke) {
@@ -322,7 +333,7 @@ Promise.all([
           if (accum) {
             return true
           }
-          if(next.shouldStage !== undefined) {
+          if (next.shouldStage !== undefined) {
             return next.shouldStage;
           }
 
@@ -345,8 +356,19 @@ Promise.all([
           );
           const newFileName = `${fileNameWithoutExtension}_${iconSize}x${iconSize}.svg`;
           const generatedFilePath = path.join(generatedIconsDir, newFileName);
-          workingCopy.svg.$.width = `${iconSize}px`;
-          workingCopy.svg.$.height = `${iconSize}px`;
+          const nonBaseGuts = workingCopy.svg;
+          nonBaseGuts.$.width = `${iconSize}px`;
+          nonBaseGuts.$.height = `${iconSize}px`;
+
+          if (iconMapping.fill) {
+            updateIconFill(
+              iconMapping.fill,
+              undefined,
+              nonBaseGuts,
+              iconMapping,
+            )
+          }
+
 
           fs.writeFileSync(generatedFilePath, buildXml(workingCopy), {
             encoding: "utf-8",
@@ -357,21 +379,21 @@ Promise.all([
 
     const iconPreviewMD: string =
       markdownTable(
-      chunk(
-        Object.entries(svgNameToPatho)
-          .sort(([nameA], [nameB]) => nameA.localeCompare(nameB))
-          .map(
-          ([iconName, iconPath]) => {
-            return [iconName, `![${iconName}](./icons${iconPath.substring(iconsDir.length)})`];
-          }
-        ),
-        3
-      )
-        .map(stuff => ([
-          stuff.map(([name, ]) => name),
-          stuff.map(([, image]) => image),
-        ]))
-        .reduce((accum, next) => accum.concat(next))
+        chunk(
+          Object.entries(svgNameToPatho)
+            .sort(([nameA], [nameB]) => nameA.localeCompare(nameB))
+            .map(
+              ([iconName, iconPath]) => {
+                return [iconName, `![${iconName}](./icons${iconPath.substring(iconsDir.length)})`];
+              }
+            ),
+          3
+        )
+          .map(stuff => ([
+            stuff.map(([name,]) => name),
+            stuff.map(([, image]) => image),
+          ]))
+          .reduce((accum, next) => accum.concat(next))
       )
 
     fs.writeFileSync(path.join(rootDir, 'all_icons.md'), iconPreviewMD, {

@@ -8,6 +8,14 @@
     "sizes": [13]
   },
   {
+    "iconName": "npm.svg",
+    "sizes": [13],
+    "fill": {
+      "iconBaseBlend": "iconAccent",
+      "iconBlendCompliment": "iconAccentCompliment"
+    }
+  },
+  {
     "iconName": "coverage.svg",
     "sizes": [13]
   },
