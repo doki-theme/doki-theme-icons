@@ -469,5 +469,21 @@
         "location": "outside"
       }
     }
+  ],
+  [
+    {
+      "name": "dual_panels.svg"
+    },
+    {
+      "name": "refresh.svg",
+      "position": "MIDDLE",
+      "scale": 0.60,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 6,
+        "location": "outside"
+      }
+    }
   ]
+
 ]
