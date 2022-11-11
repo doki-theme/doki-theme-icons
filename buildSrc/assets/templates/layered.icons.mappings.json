@@ -344,7 +344,6 @@
       }
     }
   ],
-
   [
     {
       "name": "file.svg"
@@ -368,7 +367,7 @@
     {
       "name": "chevron_up.svg",
       "position": "MIDDLE",
-      "scale": 0.65,
+      "scale": 0.60,
       "fill": "iconBlendCompliment"
     }
   ],
@@ -379,7 +378,7 @@
     {
       "name": "chevron_down.svg",
       "position": "MIDDLE",
-      "scale": 0.65,
+      "scale": 0.60,
       "fill": "iconBlendCompliment"
     }
   ],
@@ -390,7 +389,7 @@
     {
       "name": "circle.svg",
       "position": "MIDDLE",
-      "scale": 0.35,
+      "scale": 0.3,
       "fill": "iconBlendCompliment",
       "force": {
         "fill": true
@@ -398,18 +397,77 @@
     }
   ],
   [
-  {
-    "name": "link.svg",
-    "displayName": "symlink",
-    "position": "UPPER_RIGHT",
-    "scale": 0.65,
-    "shouldStage": false,
-    "stroke": {
-      "color": "#000000",
-      "thiccness": 7,
-      "location": "outside"
+    {
+      "name": "link.svg",
+      "displayName": "symlink",
+      "position": "UPPER_RIGHT",
+      "scale": 0.65,
+      "shouldStage": false,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      }
     }
-  }
-
-]
+  ],
+  [
+    {
+      "name": "partial_ring_glyph.svg"
+    },
+    {
+      "name": "heart.svg",
+      "position": "MIDDLE",
+      "scale": 0.5,
+      "fill": "iconBlendCompliment",
+      "force": {
+        "fill": true
+      }
+    }
+  ],
+  [
+    {
+      "name": "partial_ring_glyph.svg"
+    },
+    {
+      "name": "test.svg",
+      "position": "MIDDLE",
+      "scale": 0.5,
+      "fill": "iconBlendCompliment",
+      "force": {
+        "fill": true
+      }
+    }
+  ],
+  [
+    {
+      "name": "partial_triangle_glyph.svg"
+    },
+    {
+      "shouldStage": false,
+      "name": "test.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.60,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      }
+    }
+  ],
+  [
+    {
+      "name": "file.svg"
+    },
+    {
+      "shouldStage": false,
+      "name": "graph.svg",
+      "position": "MIDDLE",
+      "scale": 0.60,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      }
+    }
+  ]
 ]

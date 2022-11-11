@@ -8,6 +8,10 @@
     "sizes": [13]
   },
   {
+    "iconName": "graph.svg",
+    "sizes": [13]
+  },
+  {
     "iconName": "npm.svg",
     "sizes": [13],
     "fill": {
