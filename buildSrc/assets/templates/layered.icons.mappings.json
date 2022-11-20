@@ -484,6 +484,22 @@
         "location": "outside"
       }
     }
+  ],
+  [
+    {
+      "name": "build.svg"
+    },
+    {
+      "name": "close.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.5,
+      "fill": "iconBlendCompliment",
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 6,
+        "location": "outside"
+      }
+    }
   ]
 
 ]
