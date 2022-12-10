@@ -94,12 +94,70 @@
   ],
   [
     {
+      "name": "chevron_right.svg",
+      "position": "MIDDLE",
+      "margin": {
+        "x": -3
+      }
+    },
+    {
+      "name": "chevron_right.svg",
+      "position": "MIDDLE",
+      "scale": 1,
+      "margin": {
+        "x": 3
+      }
+    }
+  ],
+  [
+    {
+      "name": "chevron_left.svg",
+      "position": "MIDDLE",
+      "scale": 1,
+      "margin": {
+        "x": -3
+      }
+    },
+    {
+      "name": "chevron_left.svg",
+      "position": "MIDDLE",
+      "margin": {
+        "x": 3
+      }
+    }
+  ],
+  [
+    {
       "name": "breakpoint.svg"
     },
     {
       "name": "check.svg",
       "position": "UPPER_RIGHT",
       "fill": "iconBlendCompliment"
+    }
+  ],
+  [
+    {
+      "name": "db_solid.svg"
+    },
+    {
+      "name": "search_right.svg",
+      "position": "LOWER_RIGHT",
+      "fill": "iconBlendCompliment",
+      "scale": 0.65
+    }
+  ],
+  [
+    {
+      "name": "debug.svg"
+    },
+    {
+      "name": "restart.svg",
+      "position": "MIDDLE",
+      "scale": 0.38,
+      "margin": {
+        "y": 2.5
+      }
     }
   ],
   [
@@ -181,7 +239,13 @@
     },
     {
       "name": "dual_chevrons.svg",
-      "position": "MIDDLE"
+      "position": "MIDDLE",
+      "scale": 0.65,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 5,
+        "location": "outside"
+      }
     }
   ],
   [
