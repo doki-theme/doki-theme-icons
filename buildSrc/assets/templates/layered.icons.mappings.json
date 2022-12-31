@@ -138,6 +138,102 @@
   ],
   [
     {
+      "name": "view.svg"
+    },
+    {
+      "name": "check.svg",
+      "position": "UPPER_RIGHT",
+      "fill": "iconBlendCompliment"
+    }
+  ],
+  [
+    {
+      "name": "star.svg"
+    },
+    {
+      "name": "check.svg",
+      "position": "UPPER_RIGHT",
+      "fill": "iconBlendCompliment"
+    }
+  ],
+  [
+    {
+      "name": "star_outline.svg",
+      "displayName":"star_outline_disabled",
+      "fill": "disabledColor"
+    }
+  ],
+  [
+    {
+      "name": "disabled_breakpoint.svg",
+      "displayName":"muted_breakpoint",
+      "fill": "disabledColor"
+    }
+  ],
+  [
+    {
+      "name": "no_view.svg",
+      "displayName":"view_disabled",
+      "fill": "disabledColor"
+    }
+  ],
+  [
+    {
+      "name": "view.svg",
+      "displayName":"view_muted",
+      "fill": "disabledColor"
+    }
+  ],
+  [
+    {
+      "name": "breakpoint.svg",
+      "displayName":"breakpoint_inverted",
+      "fill": {
+        "iconBaseBlend": "iconBlendCompliment",
+        "iconBlendCompliment": "iconBaseBlend"
+      }
+    }
+  ],
+  [
+    {
+      "name": "breakpoint.svg",
+      "displayName":"breakpoint_inverted_check",
+      "fill": {
+        "iconBaseBlend": "iconBlendCompliment",
+        "iconBlendCompliment": "iconBaseBlend"
+      }
+    },
+    {
+      "name": "check.svg",
+      "position": "UPPER_RIGHT",
+      "fill": "iconBaseBlend"
+    }
+  ],
+  [
+    {
+      "name": "star.svg",
+      "displayName":"star_inverted",
+      "fill": {
+        "iconBaseBlend": "iconAccent"
+      }
+    }
+  ],
+  [
+    {
+      "name": "star.svg",
+      "displayName":"star_inverted_check",
+      "fill": {
+        "iconBaseBlend": "iconAccent"
+      }
+    },
+    {
+      "name": "check.svg",
+      "position": "UPPER_RIGHT",
+      "fill": "iconAccentCompliment"
+    }
+  ],
+  [
+    {
       "name": "db_solid.svg"
     },
     {
@@ -493,6 +589,20 @@
       "name": "heart.svg",
       "position": "MIDDLE",
       "scale": 0.5,
+      "fill": "iconBlendCompliment",
+      "force": {
+        "fill": true
+      }
+    }
+  ],
+  [
+    {
+      "name": "partial_ring_glyph.svg"
+    },
+    {
+      "name": "linked_angle_braces.svg",
+      "position": "MIDDLE",
+      "scale": 0.6,
       "fill": "iconBlendCompliment",
       "force": {
         "fill": true
