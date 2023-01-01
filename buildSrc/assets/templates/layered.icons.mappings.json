@@ -148,6 +148,19 @@
   ],
   [
     {
+      "name": "breakpoint.svg",
+      "scale": 0.63,
+      "position": "LOWER_LEFT"
+    },
+    {
+      "name": "star.svg",
+      "position": "UPPER_RIGHT",
+      "scale": 0.63,
+      "fill": "iconBaseBlend"
+    }
+  ],
+  [
+    {
       "name": "star.svg"
     },
     {
