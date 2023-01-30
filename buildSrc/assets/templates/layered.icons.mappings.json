@@ -515,6 +515,21 @@
   ],
   [
     {
+      "name": "cowfee.svg"
+    },
+    {
+      "name": "build.svg",
+      "position": "LOWER_RIGHT",
+      "scale": 0.5,
+      "stroke": {
+        "color": "#000000",
+        "thiccness": 7,
+        "location": "outside"
+      }
+    }
+  ],
+  [
+    {
       "name": "file.svg"
     },
     {
