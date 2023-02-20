@@ -515,6 +515,18 @@
   ],
   [
     {
+      "name": "search_right.svg",
+      "position": "MIDDLE_LEFT",
+      "scale": 0.7
+    },
+    {
+      "name": "chevron_down.svg",
+      "position": "MIDDLE_RIGHT",
+      "scale": 0.35
+    }
+  ],
+  [
+    {
       "name": "cowfee.svg"
     },
     {
